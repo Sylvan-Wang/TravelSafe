@@ -1,1 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TravelSafeSC · Country Safety Console</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="tn.css" />
+  </head>
+  <body class="tn-body">
+    <div class="tn-app">
+      <!-- ================= Header ================= -->
+      <header class="tn-header">
+        <div class="tn-header-left">
+          <div class="tn-logo-mark">TS</div>
+          <div class="tn-logo-text-group">
+            <div class="tn-logo-title">TravelSafeSC</div>
+            <div class="tn-logo-subtitle">
+              Calm, smart safety layer for solo travelers✌
+            </div>
+          </div>
+        </div>
+        <div class="tn-header-right">
+          <span class="tn-header-badge">Prototype</span>
+          <button class="tn-user-avatar" type="button" aria-label="User menu">
+            <span class="tn-user-avatar-initial">S</span>
+          </button>
+        </div>
+      </header>
 
+      <!-- ============== Main Content ============== -->
+      <main class="tn-main">
+        <!-- ===== Intro / Search Entry ===== -->
+        <section class="tn-hero">
+          <div class="tn-hero-text">
+            <h1 class="tn-hero-title">
+              Country-level safety & travel brief for solo travelers
+            </h1>
+            <p class="tn-hero-subtitle">
+              Search a country once, then switch between a calm info view and a
+              crisis-ready playbook. <br>This prototype is designed for both
+              academic evaluation and real travel use.
+            </p>
+          </div>
+
+          <!-- Search box as global entry -->
+          <div class="tn-search-area">
+            <label class="tn-search-label" for="country-search-input">
+              <b>Country search</b>
+            </label>
+            <div class="tn-search-row">
+              <input
+                id="country-search-input"
+                type="text"
+                class="tn-search-input"
+                placeholder="Type a country name, e.g. France, Japan, Brazil"
+                autocomplete="off"
+              />
+              <button
+                id="country-search-button"
+                class="tn-btn tn-btn-primary"
+                type="button"
+              >
+                Search
+              </button>
+            </div>
+            <p class="tn-search-guidance">
+              We’ll fetch a live country profile (population, region, language)
+              and combine it with a simple risk overview. <br>Then you can switch to
+              <strong>Crisis Mode</strong> for step-by-step guidance if
+              something goes wrong. <br>For the demo, try:
+              <span class="tn-chip tn-chip-soft tn-demo-country"
+                data-country="France">France</span
+              >
+              <span class="tn-chip tn-chip-soft tn-demo-country"
+                data-country="Japan">Japan</span
+              >
+              <span class="tn-chip tn-chip-soft tn-demo-country"
+                data-country="Italy">Italy</span
+              >.
+            </p>
+            <p
+              id="country-search-error"
+              class="tn-error-message"
+              aria-live="polite"
+            ></p>
+          </div>
+        </section>
+
+        <!-- ===== Tabs Navigation ===== -->
+        <nav class="tn-tabs" aria-label="Main views">
+          <button
+            class="tn-tab-btn tn-tab-btn-active"
+            type="button"
+            data-tab="info"
+            aria-selected="true"
+          >
+            <span class="tn-tab-label">Country info</span>
+            <span class="tn-tab-desc">Profile · Live data · Light risk</span>
+          </button>
+          <button
+            class="tn-tab-btn"
+            type="button"
+            data-tab="crisis"
+            aria-selected="false"
+          >
+            <span class="tn-tab-label">Crisis / Safe Mode</span>
+            <span class="tn-tab-desc">Playbook · Contacts · Ground rules</span>
+          </button>
+        </nav>
+
+        <!-- ===== Tab Panels Container ===== -->
+        <section class="tn-tab-panels">
+          <!-- ========== TAB 1: Country Info Panel ========== -->
+          <section
+            id="tab-info"
+            class="tn-tab-panel tn-tab-panel-active"
+            aria-label="Country information"
+          >
+            <div class="tn-panel-grid">
+              <!-- Left: Overview & metadata -->
+              <!-- Left: Overview & metadata -->
+              <article class="tn-card tn-card-left">
+                <header class="tn-card-header">
+                  <h2 class="tn-card-title">Country profile</h2>
+                  <p class="tn-card-subtitle">
+                    A quick overview combining live country data with your own
+                    safety-oriented metadata.
+                  </p>
+                </header>
+
+                <section class="tn-section-block tn-country-summary">
+                  <p class="tn-section-text" id="country-profile-intro">
+                    Start by searching a country above. We'll show its region,
+                    capital, languages, currency, and a short safety-oriented
+                    summary tailored to solo travelers.
+                  </p>
+                  <p class="tn-section-text" id="country-profile-region"></p>
+                </section>
+
+                <section class="tn-section-block tn-country-meta" id="info-country-meta">
+                  <ul class="tn-country-meta-list">
+                    <li class="tn-country-meta-item">
+                      <span class="tn-meta-label">Capital</span>
+                      <span class="tn-meta-value" id="country-capital">N/A</span>
+                    </li>
+                    <li class="tn-country-meta-item">
+                      <span class="tn-meta-label">Population</span>
+                      <span class="tn-meta-value" id="country-population">N/A</span>
+                    </li>
+                    <li class="tn-country-meta-item">
+                      <span class="tn-meta-label">Languages</span>
+                      <span class="tn-meta-value" id="country-languages">N/A</span>
+                    </li>
+                    <li class="tn-country-meta-item">
+                      <span class="tn-meta-label">Currencies</span>
+                      <span class="tn-meta-value" id="country-currency">N/A</span>
+                    </li>
+                  </ul>
+                </section>
+              </article>
+
+              <!-- Right: Risk overview & simple viz -->
+            <!-- Right: Risk overview & simple viz -->
+            <article class="tn-card tn-card-right">
+              <header class="tn-card-header tn-card-header-row">
+                <div>
+                  <h3 class="tn-card-title">Safety snapshot</h3>
+                  <p class="tn-card-subtitle" id="safety-header">
+                    A light-weight view of risk levels for solo travel:
+                    crime, politics, health, and natural conditions.
+                  </p>
+                </div>
+                <span
+                  id="info-risk-chip"
+                  class="tn-badge tn-badge-neutral"
+                >
+                  No country selected
+                </span>
+              </header>
+
+              <!-- Risk bars / scores -->
+              <section
+                class="tn-section-block tn-risk-section"
+                id="info-risk-bars"
+              >
+                <p class="tn-placeholder">
+                  Once a country is selected, you'll see a simple visual
+                  breakdown of four dimensions: crime, political stability,
+                  health infrastructure, and natural hazard exposure.
+                </p>
+              </section>
+
+              <!-- Optional notes / advisory source -->
+              <section
+                class="tn-section-block tn-advisory-section"
+                id="info-advisory"
+              >
+                <h4 class="tn-section-title">Advisory source</h4>
+                <p class="tn-section-text" id="safety-advisory">
+                  When possible, we map to an official travel advisory level
+                  (e.g. Level 1–4). If live data is unavailable, we fall back
+                  to curated demo values for a few sample countries.
+                </p>
+              </section>
+            </article>
+            </div>
+          </section>
+
+          <!-- ========== TAB 2: Crisis / Safe Mode ========== -->
+          <section
+            id="tab-crisis"
+            class="tn-tab-panel"
+            aria-label="Crisis and safety guidance"
+            hidden
+          >
+            <div class="tn-panel-grid">
+              <!-- Left: Static safety & contacts -->
+              <article class="tn-card tn-card-left">
+                <header class="tn-card-header">
+                  <h2 class="tn-card-title">If something goes wrong</h2>
+                  <p class="tn-card-subtitle">
+                    This mode turns the same country into a calm, practical
+                    checklist: what to watch out for, and who to contact.
+                  </p>
+                </header>
+
+                <!-- Overall risk & top risks -->
+                <section
+                  class="tn-section-block tn-crisis-overview"
+                  id="crisis-overview"
+                >
+                  <p class="tn-placeholder">
+                    Select a country above. We’ll show an overall risk label,
+                    the most relevant risk types for solo travelers, and a
+                    simple mindset reminder.
+                  </p>
+                </section>
+
+                <!-- Emergency contacts -->
+                <section
+                  class="tn-section-block tn-crisis-contacts"
+                  id="crisis-contacts"
+                >
+                  <h3 class="tn-section-title">Emergency contacts</h3>
+                  <p class="tn-placeholder">
+                    Police, ambulance, fire, and a placeholder for your home
+                    country’s embassy or consulate in this destination.
+                  </p>
+                  <!-- Contact list will be injected here -->
+                </section>
+              </article>
+
+              <!-- Right: Playbook + "AI-like" response -->
+              <article class="tn-card tn-card-right">
+                <header class="tn-card-header">
+                  <h3 class="tn-card-title">Crisis playbook</h3>
+                  <p class="tn-card-subtitle">
+                    Common scenarios (lost passport, protests, sudden illness)
+                    with a step-by-step playbook. Below, you can also type a
+                    free-text question to get a short, AI-style answer powered
+                    by these rules.
+                  </p>
+                </header>
+
+                <!-- Scenario-specific playbook blocks -->
+                <section
+                  class="tn-section-block tn-playbook-section"
+                  id="crisis-playbook"
+                >
+                  <p class="tn-placeholder">
+                    Once a country is selected, we’ll surface 2–3 core
+                    scenarios with very concrete steps. This content is driven
+                    by your offline JSON and does not depend on network
+                    quality.
+                  </p>
+                </section>
+
+                <!-- User question + mock AI answer -->
+                <section
+                  class="tn-section-block tn-crisis-qna"
+                  id="crisis-qna"
+                >
+                  <h4 class="tn-section-title">Ask a quick question</h4>
+                  <p class="tn-section-text">
+                    Example: “Public transport is on strike and I’m alone in
+                    the city center, what should I do first?”
+                  </p>
+
+                  <form
+                    id="crisis-question-form"
+                    class="tn-form tn-crisis-form"
+                  >
+                    <label class="tn-field">
+                      <span class="tn-field-label">Your situation</span>
+                      <textarea
+                        id="crisis-question-input"
+                        class="tn-input tn-textarea"
+                        rows="3"
+                        placeholder="Describe what is happening. We’ll respond with a short, calm suggestion based on the country’s playbook."
+                      ></textarea>
+                    </label>
+                    <div class="tn-form-row tn-form-row-end">
+                      <button
+                        type="submit"
+                        class="tn-btn tn-btn-primary"
+                        id="crisis-question-submit"
+                      >
+                        Generate guidance
+                      </button>
+                    </div>
+                  </form>
+
+                  <div
+                    class="tn-ai-answer"
+                    id="crisis-ai-answer"
+                    aria-live="polite"
+                  >
+                    <p class="tn-placeholder">
+                      Your answer will appear here as a short paragraph. In
+                      this prototype, it is generated on the client side using
+                      the offline safety JSON, but the UX is already shaped for
+                      a real AI backend.
+                    </p>
+                  </div>
+                </section>
+              </article>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <!-- ============== Footer ============== -->
+      <footer class="tn-footer">
+        <p class="tn-footer-text">
+          TravelSafeSC · Country Safety Console · Prototype for Claude Hackathon
+          · 2025 ·
+        </p>
+      </footer>
+    </div>
+
+    <!-- Main script -->
+    <script src="tn.js"></script>
+  </body>
+</html>
+
+
+<!-- USC layer demo card -->
+<div class="card" id="usc-layer-card">
+  <h3>USC support layer (demo)</h3>
+  <p id="usc-layer-intro" class="label"></p>
+
+  <ul style="margin-top: 8px; line-height: 1.5;">
+    <li><strong>Emergency number:</strong> <span id="usc-emergency"></span></li>
+    <li><strong>Student health insurance:</strong> <span id="usc-insurance"></span></li>
+    <li><strong>Approved providers abroad:</strong> <span id="usc-providers"></span></li>
+    <li><strong>Embassy / consulate info:</strong> <span id="usc-embassy"></span></li>
+    <li><strong>Regional advisories:</strong> <span id="usc-advisories"></span></li>
+    <li><strong>Traveler registration:</strong> <span id="usc-traveler-reg"></span></li>
+  </ul>
+
+  <p class="label" style="margin-top: 12px;" id="usc-layer-note"></p>
+</div>
