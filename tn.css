@@ -1,21 +1,46 @@
 /* =========================
+   USC International Travel Safety Assistant
+   Themed with USC Brand Colors
+========================= */
+
+/* =========================
    Base & Layout
 ========================= */
 
 :root {
-  --tn-color-bg: #faf7f3; /* Sand Beige */
-  --tn-color-primary: #007aff; /* Sky Blue */
-  --tn-color-primary-soft: rgba(0, 122, 255, 0.08);
-  --tn-color-accent: #ffd85a; /* Sun Yellow */
+  /* USC Brand Colors */
+  --usc-cardinal: #990000; /* USC Cardinal - Primary */
+  --usc-gold: #FFCC00; /* USC Gold - Primary */
+  --usc-cardinal-dark: #7a0000; /* Darker Cardinal for gradients */
+  --usc-cardinal-light: rgba(153, 0, 0, 0.08); /* Light Cardinal bg */
+  --usc-gold-soft: rgba(255, 204, 0, 0.15); /* Soft Gold bg */
+  
+  /* Neutral Colors */
+  --usc-black: #000000;
+  --usc-white: #FFFFFF;
+  --usc-gray-light: #D1D1D1; /* 30% Black */
+  --usc-gray-dark: #666666; /* 70% Black */
+  --usc-gray-medium: #999999;
+  --usc-cream: #FFFBF5; /* Warm background */
+  
+  /* Application Colors */
+  --tn-color-bg: #F8F8F8; /* Light neutral background */
+  --tn-color-primary: var(--usc-cardinal);
+  --tn-color-primary-soft: var(--usc-cardinal-light);
+  --tn-color-accent: var(--usc-gold);
   --tn-color-text-main: #2c2c2c;
-  --tn-color-text-sub: #666666;
+  --tn-color-text-sub: var(--usc-gray-dark);
   --tn-color-border: #e0e0e0;
   --tn-color-success: #34c759;
-  --tn-color-error: #ff3b30;
-  --tn-radius-sm: 8px;
-  --tn-radius-md: 12px;
-  --tn-radius-lg: 16px;
-  --tn-shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+  --tn-color-error: #cc0000; /* USC-style red */
+  
+  /* Design tokens */
+  --tn-radius-sm: 4px;
+  --tn-radius-md: 8px;
+  --tn-radius-lg: 12px;
+  --tn-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --tn-shadow-medium: 0 6px 16px rgba(153, 0, 0, 0.12);
+  --tn-shadow-gold: 0 4px 12px rgba(255, 204, 0, 0.25);
   --tn-transition-fast: 0.15s ease-out;
   --tn-transition-normal: 0.2s ease-out;
   --tn-max-width: 1200px;
@@ -34,8 +59,9 @@ body {
 }
 
 body.tn-body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-    "PingFang SC", "Inter", system-ui, -system-ui, sans-serif;
+  /* USC Typography: National 2 fallback to Source Sans 3, then system fonts */
+  font-family: "National 2", "Source Sans 3", -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   background-color: var(--tn-color-bg);
   color: var(--tn-color-text-main);
   line-height: 1.5;
@@ -65,17 +91,17 @@ body.tn-body {
 }
 
 /* =========================
-   Header
+   Header - USC Themed
 ========================= */
 
 .tn-header {
   width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  background-color: #ffffffdd;
-  backdrop-filter: blur(8px);
+  border-bottom: 3px solid var(--usc-gold); /* USC Gold bottom border */
+  background: linear-gradient(180deg, var(--usc-cardinal) 0%, var(--usc-cardinal-dark) 100%);
   position: sticky;
   top: 0;
   z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .tn-header > .tn-header-left,
@@ -91,7 +117,7 @@ body.tn-body {
 
 .tn-header-left,
 .tn-header-right {
-  padding: 10px 16px;
+  padding: 12px 16px;
 }
 
 .tn-header-left {
@@ -104,24 +130,25 @@ body.tn-body {
 .tn-header-right {
   position: absolute;
   right: 16px;
-  top: 8px;
+  top: 10px;
   gap: 8px;
 }
 
-/* Logo */
+/* Logo - USC Style */
 
 .tn-logo-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--tn-color-primary), #4ca3ff);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: var(--usc-gold);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  margin-right: 10px;
+  color: var(--usc-cardinal);
+  font-weight: 700;
+  font-size: 16px;
+  margin-right: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .tn-logo-text-group {
@@ -131,40 +158,45 @@ body.tn-body {
 
 .tn-logo-title {
   font-size: 18px;
-  font-weight: 600;
-  color: var(--tn-color-text-main);
+  font-weight: 700;
+  color: var(--usc-white);
+  letter-spacing: -0.3px;
 }
 
 .tn-logo-subtitle {
-  font-size: 13px;
-  color: var(--tn-color-text-sub);
+  font-size: 12px;
+  color: var(--usc-gold);
+  font-weight: 500;
 }
 
 /* Header right */
 
 .tn-header-badge {
   font-size: 11px;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  background-color: #ffffff;
-  color: var(--tn-color-text-sub);
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--usc-gold);
+  font-weight: 600;
+  backdrop-filter: blur(4px);
 }
 
 .tn-user-avatar {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  border: none;
+  border: 2px solid var(--usc-gold);
   padding: 0;
   margin: 0;
-  background-color: var(--tn-color-primary-soft);
-  color: var(--tn-color-primary);
+  background-color: var(--usc-white);
+  color: var(--usc-cardinal);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 700;
   cursor: default;
+  font-size: 14px;
 }
 
 /* =========================
@@ -172,8 +204,8 @@ body.tn-body {
 ========================= */
 
 .tn-hero {
-  margin-top: 20px;
-  margin-bottom: 16px;
+  margin-top: 24px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -184,9 +216,11 @@ body.tn-body {
 }
 
 .tn-hero-title {
-  font-size: 24px;
+  font-size: 26px;
   line-height: 1.3;
   margin: 0 0 8px;
+  color: var(--usc-cardinal);
+  font-weight: 700;
 }
 
 .tn-hero-subtitle {
@@ -209,6 +243,7 @@ body.tn-body {
   color: var(--tn-color-text-sub);
   display: block;
   margin-bottom: 2px;
+  font-weight: 500;
 }
 
 .tn-search-row {
@@ -221,10 +256,10 @@ body.tn-body {
   flex: 1;
   padding: 12px 14px;
   border-radius: var(--tn-radius-md);
-  border: 1px solid var(--tn-color-border);
+  border: 2px solid var(--tn-color-border);
   font-size: 14px;
   outline: none;
-  background-color: #ffffff;
+  background-color: var(--usc-white);
   min-width: 0;
   transition: border-color var(--tn-transition-fast),
     box-shadow var(--tn-transition-fast),
@@ -232,19 +267,19 @@ body.tn-body {
 }
 
 .tn-search-input:focus {
-  border-color: var(--tn-color-primary);
-  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.15);
-  background-color: #ffffff;
+  border-color: var(--usc-cardinal);
+  box-shadow: 0 0 0 3px var(--usc-cardinal-light);
+  background-color: var(--usc-white);
 }
 
-/* Buttons */
+/* Buttons - USC Style */
 
 .tn-btn {
-  border-radius: 999px;
+  border-radius: 6px; /* Less rounded for professional look */
   border: none;
-  padding: 9px 16px;
+  padding: 11px 20px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -254,23 +289,27 @@ body.tn-body {
     box-shadow var(--tn-transition-fast),
     transform var(--tn-transition-fast),
     opacity var(--tn-transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 13px;
 }
 
 .tn-btn-primary {
-  background-color: var(--tn-color-primary);
-  color: #ffffff;
-  box-shadow: 0 6px 14px rgba(0, 122, 255, 0.3);
+  background-color: var(--usc-gold);
+  color: var(--usc-cardinal);
+  box-shadow: var(--tn-shadow-gold);
+  font-weight: 700;
 }
 
 .tn-btn-primary:hover {
-  background-color: #0062cc;
-  box-shadow: 0 8px 18px rgba(0, 122, 255, 0.35);
-  transform: translateY(-1px);
+  background-color: #FFD700;
+  box-shadow: 0 6px 16px rgba(255, 204, 0, 0.35);
+  transform: translateY(-2px);
 }
 
 .tn-btn-primary:active {
   transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0, 122, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(255, 204, 0, 0.25);
 }
 
 /* Search guidance */
@@ -283,7 +322,7 @@ body.tn-body {
 
 .tn-search-guidance strong {
   font-weight: 600;
-  color: var(--tn-color-text-main);
+  color: var(--usc-cardinal);
 }
 
 /* Chips */
@@ -292,10 +331,11 @@ body.tn-body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 10px;
-  border-radius: 999px;
+  padding: 5px 12px;
+  border-radius: 4px;
   font-size: 12px;
   cursor: default;
+  font-weight: 500;
 }
 
 .tn-chip-soft {
@@ -306,13 +346,17 @@ body.tn-body {
 .tn-demo-country {
   cursor: pointer;
   margin-left: 4px;
-  border: 1px solid transparent;
+  border: 1px solid var(--tn-color-border);
+  background-color: var(--usc-white);
+  transition: all var(--tn-transition-fast);
 }
 
 .tn-demo-country:hover {
-  border-color: rgba(0, 0, 0, 0.08);
-  background-color: rgba(0, 122, 255, 0.06);
-  color: var(--tn-color-primary);
+  border-color: var(--usc-cardinal);
+  background-color: var(--usc-cardinal-light);
+  color: var(--usc-cardinal);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(153, 0, 0, 0.15);
 }
 
 /* Error message */
@@ -321,32 +365,34 @@ body.tn-body {
   margin: 4px 0 0;
   font-size: 12px;
   color: var(--tn-color-error);
+  font-weight: 500;
 }
 
 /* =========================
-   Tabs
+   Tabs - USC Style
 ========================= */
 
 .tn-tabs {
-  margin-top: 16px;
+  margin-top: 20px;
   display: inline-flex;
   align-items: stretch;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 999px;
-  padding: 2px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  background-color: var(--usc-white);
+  border-radius: var(--tn-radius-md);
+  padding: 3px;
+  box-shadow: var(--tn-shadow-soft);
+  border: 2px solid var(--usc-gray-light);
 }
 
 .tn-tab-btn {
-  border-radius: 999px;
+  border-radius: 6px;
   border: none;
-  padding: 8px 14px;
+  padding: 10px 16px;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   cursor: pointer;
-  min-width: 120px;
+  min-width: 130px;
   transition: background-color var(--tn-transition-fast),
     color var(--tn-transition-fast),
     box-shadow var(--tn-transition-fast),
@@ -354,24 +400,34 @@ body.tn-body {
 }
 
 .tn-tab-btn:not(.tn-tab-btn-active):hover {
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: var(--usc-cardinal-light);
 }
 
 .tn-tab-btn-active {
-  background-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: var(--usc-cardinal);
+  box-shadow: 0 4px 12px rgba(153, 0, 0, 0.2);
   transform: translateY(-1px);
 }
 
 .tn-tab-label {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--tn-color-text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.tn-tab-btn-active .tn-tab-label {
+  color: var(--usc-white);
 }
 
 .tn-tab-desc {
   font-size: 11px;
   color: var(--tn-color-text-sub);
+}
+
+.tn-tab-btn-active .tn-tab-desc {
+  color: var(--usc-gold);
 }
 
 /* Tab panels */
@@ -408,20 +464,21 @@ body.tn-body {
 }
 
 .tn-card {
-  background-color: #ffffff;
+  background-color: var(--usc-white);
   border-radius: var(--tn-radius-lg);
   box-shadow: var(--tn-shadow-soft);
-  padding: 16px 16px 18px;
+  padding: 18px 18px 20px;
+  border-top: 4px solid var(--usc-cardinal);
 }
 
 @media (min-width: 768px) {
   .tn-card {
-    padding: 18px 20px 20px;
+    padding: 20px 22px 22px;
   }
 }
 
 .tn-card-header {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .tn-card-header-row {
@@ -434,6 +491,8 @@ body.tn-body {
 .tn-card-title {
   font-size: 18px;
   margin: 0 0 4px;
+  color: var(--usc-cardinal);
+  font-weight: 700;
 }
 
 .tn-card-subtitle {
@@ -447,9 +506,9 @@ body.tn-body {
 ========================= */
 
 .tn-section-block {
-  margin-top: 10px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .tn-section-block:first-of-type {
@@ -459,8 +518,9 @@ body.tn-body {
 
 .tn-section-title {
   font-size: 14px;
-  font-weight: 600;
-  margin: 0 0 4px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--usc-cardinal);
 }
 
 .tn-section-text {
@@ -478,35 +538,44 @@ body.tn-body {
   font-style: italic;
 }
 
-/* Badges */
+/* Badges - USC Themed */
 
 .tn-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 3px 8px;
-  border-radius: 999px;
+  padding: 4px 10px;
+  border-radius: 4px;
   font-size: 11px;
   border: 1px solid transparent;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .tn-badge-neutral {
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: rgba(0, 0, 0, 0.04);
   color: var(--tn-color-text-sub);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
-/* Risk / advisory pill colors can be refined via JS, but base is here */
+/* Risk / advisory pill colors */
 .tn-badge-low {
-  background-color: rgba(52, 199, 89, 0.12);
-  color: var(--tn-color-success);
+  background-color: rgba(52, 199, 89, 0.15);
+  color: #1a7a2e;
+  border-color: rgba(52, 199, 89, 0.3);
 }
+
 .tn-badge-medium {
-  background-color: rgba(255, 216, 90, 0.18);
+  background-color: var(--usc-gold-soft);
   color: #b88700;
+  border-color: rgba(255, 204, 0, 0.4);
 }
+
 .tn-badge-high {
-  background-color: rgba(255, 59, 48, 0.12);
+  background-color: rgba(204, 0, 0, 0.12);
   color: var(--tn-color-error);
+  border-color: rgba(204, 0, 0, 0.3);
 }
 
 /* =========================
@@ -514,10 +583,10 @@ body.tn-body {
 ========================= */
 
 .tn-form {
-  margin-top: 4px;
+  margin-top: 6px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .tn-field {
@@ -529,12 +598,13 @@ body.tn-body {
 .tn-field-label {
   font-size: 13px;
   color: var(--tn-color-text-sub);
+  font-weight: 600;
 }
 
 .tn-input {
-  padding: 9px 10px;
+  padding: 10px 12px;
   border-radius: var(--tn-radius-md);
-  border: 1px solid var(--tn-color-border);
+  border: 2px solid var(--tn-color-border);
   font-size: 14px;
   outline: none;
   resize: vertical;
@@ -542,12 +612,12 @@ body.tn-body {
   transition: border-color var(--tn-transition-fast),
     box-shadow var(--tn-transition-fast),
     background-color var(--tn-transition-fast);
-  background-color: #ffffff;
+  background-color: var(--usc-white);
 }
 
 .tn-input:focus {
-  border-color: var(--tn-color-primary);
-  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.15);
+  border-color: var(--usc-cardinal);
+  box-shadow: 0 0 0 3px var(--usc-cardinal-light);
 }
 
 .tn-textarea {
@@ -571,13 +641,15 @@ body.tn-body {
 ========================= */
 
 .tn-ai-answer {
-  margin-top: 8px;
-  padding: 10px 12px;
-  background-color: #fdfbf7;
+  margin-top: 10px;
+  padding: 12px 14px;
+  background-color: var(--usc-cream);
   border-radius: var(--tn-radius-md);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--usc-gold);
+  border-left: 4px solid var(--usc-gold);
   font-size: 13px;
   color: var(--tn-color-text-main);
+  line-height: 1.5;
 }
 
 /* =========================
@@ -589,42 +661,47 @@ body.tn-body {
 .tn-playbook-list {
   list-style: none;
   padding: 0;
-  margin: 6px 0 0;
+  margin: 8px 0 0;
 }
 
 .tn-crisis-contacts-item,
 .tn-country-meta-item,
 .tn-playbook-item {
   font-size: 13px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  padding: 4px 0;
 }
 
 .tn-meta-label {
   color: var(--tn-color-text-sub);
+  font-weight: 500;
 }
 
 .tn-meta-value {
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--tn-color-text-main);
 }
 
 /* Playbook scenario title */
 
 .tn-playbook-scenario-title {
   font-size: 13px;
-  font-weight: 600;
-  margin: 4px 0 2px;
+  font-weight: 700;
+  margin: 6px 0 3px;
+  color: var(--usc-cardinal);
 }
 
 /* =========================
-   Footer
+   Footer - USC Style
 ========================= */
 
 .tn-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.03);
-  padding: 10px 16px 16px;
+  border-top: 3px solid var(--usc-gold);
+  background-color: var(--usc-cardinal);
+  padding: 16px 16px 18px;
   margin-top: auto;
 }
 
@@ -632,7 +709,20 @@ body.tn-body {
   margin: 0;
   text-align: center;
   font-size: 12px;
-  color: var(--tn-color-text-sub);
+  color: var(--usc-gold);
+  font-weight: 500;
+}
+
+.tn-footer-text a {
+  color: var(--usc-white);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity var(--tn-transition-fast);
+}
+
+.tn-footer-text a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
 /* =========================
@@ -646,7 +736,7 @@ body.tn-body {
 
   .tn-tab-btn {
     min-width: 0;
-    padding: 6px 10px;
+    padding: 8px 12px;
   }
 
   .tn-card-title {
@@ -654,7 +744,7 @@ body.tn-body {
   }
 
   .tn-hero-title {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .tn-main {
@@ -669,4 +759,61 @@ body.tn-body {
   .tn-btn-primary {
     width: 100%;
   }
+
+  .tn-tabs {
+    width: 100%;
+  }
+
+  .tn-tab-btn {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* =========================
+   USC-Specific Enhancements
+========================= */
+
+/* OIS Integration Badge */
+.tn-ois-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background-color: var(--usc-gold-soft);
+  border: 1px solid var(--usc-gold);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--usc-cardinal);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* USC Emergency Contact Highlight */
+.tn-usc-emergency {
+  background-color: var(--usc-cardinal-light);
+  border-left: 4px solid var(--usc-cardinal);
+  padding: 10px 12px;
+  border-radius: var(--tn-radius-md);
+  margin: 8px 0;
+}
+
+.tn-usc-emergency strong {
+  color: var(--usc-cardinal);
+  font-weight: 700;
+}
+
+/* Accent underlines for emphasis */
+.tn-accent-underline {
+  border-bottom: 2px solid var(--usc-gold);
+  padding-bottom: 2px;
+  display: inline-block;
+}
+
+/* Fight On! styling */
+.tn-fight-on {
+  color: var(--usc-cardinal);
+  font-weight: 700;
+  font-style: italic;
 }
