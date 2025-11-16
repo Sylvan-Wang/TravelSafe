@@ -1,0 +1,31 @@
+{
+  "FR": {
+    "code": "FR",
+    "name": "France",
+    "region": "Western Europe",
+    "overall_risk": "medium",
+    "risk_scores": {
+      "crime": 3,
+      "political": 2,
+      "health": 1,
+      "natural_disaster": 2
+    },
+    "top_risks": [
+      "petty theft in crowded areas",
+      "transport strikes & delays",
+      "tourist scams around landmarks"
+    ],
+    "emergency_contacts": {
+      "police": "17 (or 112 EU emergency)",
+      "ambulance": "15 (or 112)",
+      "fire": "18 (or 112)",
+      "note": "In practice, 112 works across the EU for any emergency. Keep your passport photo and digital copies safe."
+    },
+    "mindset_tip": "…",
+    "playbook": {
+      "lost_passport": { "label": "…", "steps": ["…","…"] }
+    }
+  },
+  "JP": { ... },
+  "IT": { ... }
+}
