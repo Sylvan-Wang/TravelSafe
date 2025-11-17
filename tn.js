@@ -4,32 +4,34 @@
 // ===============================
 
 (function () {
-  const REST_COUNTRIES_BASE =
-    "https://restcountries.com/v3.1/name/";
+  const REST_COUNTRIES_BASE = "https://restcountries.com/v3.1/name/";
 
   // ---------- Demo / fallback country metadata ----------
   // risk_scores: 1 (low) – 5 (high)
 
   let COUNTRY_SAFETY = {};
   async function loadCountrySafetyJson() {
-  try {
-    const resp = await fetch("country_safety.json"); // 🔥 文件名要和你目录一致
-    if (!resp.ok) {
-      throw new Error("Failed to load country_safety.json");
+    try {
+      const resp = await fetch("country_safety.json"); // 🔥 文件名要和你目录一致
+      if (!resp.ok) {
+        throw new Error("Failed to load country_safety.json");
+      }
+      COUNTRY_SAFETY = await resp.json();
+      console.log(
+        "Loaded safety data:",
+        Object.keys(COUNTRY_SAFETY).length,
+        "countries"
+      );
+    } catch (err) {
+      console.error("Error loading safety JSON:", err);
+      COUNTRY_SAFETY = {}; // fallback
     }
-    COUNTRY_SAFETY = await resp.json();
-    console.log("Loaded safety data:", Object.keys(COUNTRY_SAFETY).length, "countries");
-  } catch (err) {
-    console.error("Error loading safety JSON:", err);
-    COUNTRY_SAFETY = {}; // fallback
   }
-}
 
-
-function isCoreCountry(code) {
-  const safety = COUNTRY_SAFETY[code];
-  return safety && safety.is_core_country === true;
-}
+  function isCoreCountry(code) {
+    const safety = COUNTRY_SAFETY[code];
+    return safety && safety.is_core_country === true;
+  }
 
   // Helper to find fallback by name (case-insensitive)
   function findFallbackCountryByName(name) {
@@ -40,9 +42,7 @@ function isCoreCountry(code) {
       entries.find(
         (c) =>
           c.name.toLowerCase() === lower ||
-          (c.alt_names || []).some(
-            (alt) => alt.toLowerCase() === lower
-          )
+          (c.alt_names || []).some((alt) => alt.toLowerCase() === lower)
       ) || null
     );
   }
@@ -98,8 +98,7 @@ function isCoreCountry(code) {
 
   function normalizeApiCountry(item) {
     if (!item) return null;
-    const nameCommon =
-      item.name && item.name.common ? item.name.common : "";
+    const nameCommon = item.name && item.name.common ? item.name.common : "";
     const code = item.cca2 || "";
     const region = item.region || "";
     const subregion = item.subregion || "";
@@ -109,9 +108,7 @@ function isCoreCountry(code) {
         : "N/A";
 
     const population = item.population || null;
-    const languages = item.languages
-      ? Object.values(item.languages)
-      : [];
+    const languages = item.languages ? Object.values(item.languages) : [];
     const currencies = item.currencies
       ? Object.values(item.currencies).map((c) => c.name)
       : [];
@@ -124,18 +121,15 @@ function isCoreCountry(code) {
       capital,
       population,
       languages,
-      currencies
+      currencies,
     };
   }
 
   function formatPopulation(num) {
     if (!num || isNaN(num)) return "N/A";
-    if (num >= 1_000_000_000)
-      return (num / 1_000_000_000).toFixed(1) + "B";
-    if (num >= 1_000_000)
-      return (num / 1_000_000).toFixed(1) + "M";
-    if (num >= 1_000)
-      return (num / 1_000).toFixed(1) + "K";
+    if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
+    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
+    if (num >= 1_000) return (num / 1_000).toFixed(1) + "K";
     return String(num);
   }
 
@@ -144,7 +138,7 @@ function isCoreCountry(code) {
     const tabButtons = $all(".tn-tab-btn");
     const panels = {
       info: $("#tab-info"),
-      crisis: $("#tab-crisis")
+      crisis: $("#tab-crisis"),
     };
 
     tabButtons.forEach((btn) => {
@@ -154,10 +148,7 @@ function isCoreCountry(code) {
         tabButtons.forEach((b) => {
           const isActive = b === btn;
           b.classList.toggle("tn-tab-btn-active", isActive);
-          b.setAttribute(
-            "aria-selected",
-            isActive ? "true" : "false"
-          );
+          b.setAttribute("aria-selected", isActive ? "true" : "false");
         });
         // Update panels
         Object.entries(panels).forEach(([key, panel]) => {
@@ -182,9 +173,7 @@ function isCoreCountry(code) {
     const demoChips = $all(".tn-demo-country");
 
     async function triggerSearch(fromDemo) {
-      const raw = fromDemo
-        ? fromDemo
-        : input.value && input.value.trim();
+      const raw = fromDemo ? fromDemo : input.value && input.value.trim();
       if (!raw) {
         setText(
           errorEl,
@@ -229,8 +218,10 @@ function isCoreCountry(code) {
     const crisisOverview = $("#crisis-overview");
     const errorEl = $("#country-search-error");
 
-    
-
+    // Wait for safety data to load if not already loaded
+    if (Object.keys(COUNTRY_SAFETY).length === 0) {
+      await loadCountrySafetyJson();
+    }
 
     let apiData = null;
     let safetyData = null;
@@ -242,27 +233,44 @@ function isCoreCountry(code) {
       console.warn("REST Countries error:", err);
       setText(
         errorEl,
-        "We couldn’t get live data for this country. Falling back to demo countries if available."
+        "We couldn't get live data for this country. Falling back to demo countries if available."
       );
     }
 
     if (apiData) {
-      // Try to match safety data by code or name
-      const byCode =
-        COUNTRY_SAFETY[apiData.code] || null;
-      const byName = findFallbackCountryByName(
-        apiData.name
-      );
-      safetyData = byCode || byName || null;
-
-      if (!safetyData) {
-        // No specific safety profile, build a generic shell
-        safetyData = buildGenericSafety(apiData);
+      // Try to match safety data by code first (most reliable)
+      const byCode = COUNTRY_SAFETY[apiData.code] || null;
+      if (byCode) {
+        safetyData = byCode;
+        console.log(
+          `✓ Matched by code: ${apiData.code} -> ${safetyData.name}`,
+          {
+            risk_scores: safetyData.risk_scores,
+            overall_risk: safetyData.overall_risk,
+            full_data: safetyData,
+          }
+        );
+      } else {
+        // Fallback to name matching
+        const byName = findFallbackCountryByName(apiData.name);
+        if (byName) {
+          safetyData = byName;
+          console.log(`✓ Matched by name: ${apiData.name} -> ${byName.name}`, {
+            risk_scores: safetyData.risk_scores,
+            overall_risk: safetyData.overall_risk,
+          });
+        } else {
+          // No match found - this should be rare since we have 250 countries
+          console.warn(
+            `⚠ No safety data found for ${apiData.name} (${
+              apiData.code
+            }). Total loaded: ${Object.keys(COUNTRY_SAFETY).length}`
+          );
+          safetyData = buildGenericSafety(apiData);
+        }
       }
     } else {
-      const fallbackCountry = findFallbackCountryByName(
-        query
-      );
+      const fallbackCountry = findFallbackCountryByName(query);
       if (!fallbackCountry) {
         // No demo data, show generic error & stop
         renderNoCountrySelected();
@@ -277,7 +285,7 @@ function isCoreCountry(code) {
         capital: "N/A",
         population: null,
         languages: [],
-        currencies: []
+        currencies: [],
       };
       safetyData = fallbackCountry;
     }
@@ -287,7 +295,7 @@ function isCoreCountry(code) {
       name: apiData.name,
       api: apiData,
       safety: safetyData,
-      usedFallback
+      usedFallback,
     };
 
     renderCountryInfo(currentCountry);
@@ -304,46 +312,48 @@ function isCoreCountry(code) {
         crime: 3,
         political: 3,
         health: 3,
-        natural_disaster: 3
+        natural_disaster: 3,
       },
       top_risks: [
         "keep valuables close in busy areas",
-        "check local news if something feels unusual"
+        "check local news if something feels unusual",
       ],
       emergency_contacts: {
         police: "Local emergency number",
         ambulance: "Local medical emergency number",
         fire: "Local fire emergency number",
-        note:
-          "Look up the specific emergency numbers before or right after arrival."
+        note: "Look up the specific emergency numbers before or right after arrival.",
       },
       mindset_tip:
         "Most trips go well. Keep a basic safety routine, share your itinerary with someone you trust, and stay aware of your surroundings.",
-      playbook: {}
+      playbook: {},
     };
   }
 
   function renderNoCountrySelected() {
     const riskChip = $("#info-risk-chip");
-    const summaryEl = $("#info-country-summary");
+    const introEl = $("#country-profile-intro");
+    const regionEl = $("#country-profile-region");
     const metaEl = $("#info-country-meta");
     const riskBars = $("#info-risk-bars");
-    const advisory = $("#info-advisory-text");
+    const advisory = $("#safety-advisory");
     const crisisOverview = $("#crisis-overview");
     const crisisContacts = $("#crisis-contacts");
-    const playbook = $("#crisis-playbook");  // ✅ 修复
+    const playbook = $("#crisis-playbook");
     const aiAnswer = $("#crisis-ai-answer");
 
     if (riskChip) {
-      riskChip.className =
-        "tn-badge tn-badge-neutral";
+      riskChip.className = "tn-badge tn-badge-neutral";
       setText(riskChip, "No country selected");
     }
-    if (summaryEl) {
-      setHTML(
-        summaryEl,
-        '<p class="tn-placeholder">We couldn’t match this query to any live or demo country. Please try a different spelling, or use France / Japan / Italy for the demo.</p>'
+    if (introEl) {
+      setText(
+        introEl,
+        "Start by searching a country above. We'll show its region, capital, languages, currency, and a short safety-oriented summary tailored to solo travelers."
       );
+    }
+    if (regionEl) {
+      setText(regionEl, "");
     }
     if (metaEl) {
       metaEl.innerHTML = "";
@@ -351,13 +361,13 @@ function isCoreCountry(code) {
     if (riskBars) {
       setHTML(
         riskBars,
-        '<p class="tn-placeholder">Risk bars will appear once a supported country is loaded.</p>'
+        '<p class="tn-placeholder">Once a country is selected, you\'ll see a simple visual breakdown of four dimensions: crime, political stability, health infrastructure, and natural hazard exposure.</p>'
       );
     }
     if (advisory) {
       setText(
         advisory,
-        "We could not map this query to a supported country. Try a different spelling or another example."
+        "When possible, we map to an official travel advisory level (e.g. Level 1–4). If live data is unavailable, we fall back to curated demo values for a few sample countries."
       );
     }
     if (crisisOverview) {
@@ -367,9 +377,9 @@ function isCoreCountry(code) {
       );
     }
     if (crisisContacts) {
-      crisisContacts.querySelectorAll("ul").forEach(
-        (ul) => (ul.innerHTML = "")
-      );
+      crisisContacts
+        .querySelectorAll("ul")
+        .forEach((ul) => (ul.innerHTML = ""));
     }
     if (playbook) {
       setHTML(
@@ -385,143 +395,138 @@ function isCoreCountry(code) {
     }
   }
 
+  // =============== Text templates: data -> copy ===============
 
-// =============== Text templates: data -> copy ===============
-
-// countryMeta 来自 REST Countries 的单个国家对象
-function buildCountryProfileText(countryMeta) {
-  if (!countryMeta) {
-    return {
-      intro:
-        "We couldn’t load this country’s profile. Please check your network or try another country.",
-      region:
-        "Region information is currently unavailable.",
-      facts: {
-        capital: "Unknown",
-        population: "Unknown",
-        languages: "Unknown",
-        currency: "Unknown"
-      }
-    };
-  }
-
-  const name = countryMeta.name?.common ?? "this country";
-  const region = countryMeta.region ?? "Unknown region";
-  const subregion = countryMeta.subregion;
-  const pop = countryMeta.population;
-  const capital = Array.isArray(countryMeta.capital)
-    ? countryMeta.capital[0]
-    : countryMeta.capital;
-
-  const languages = countryMeta.languages
-    ? Object.values(countryMeta.languages).slice(0, 3)
-    : [];
-
-  const currencies = countryMeta.currencies
-    ? Object.values(countryMeta.currencies)
-        .map((c) => c.name)
-        .slice(0, 2)
-    : [];
-
-  const populationStr = pop
-    ? `${(pop / 1_000_000).toFixed(1)}M`
-    : "N/A";
-
-  const langStr = languages.length ? languages.join(", ") : "N/A";
-  const currencyStr = currencies.length ? currencies.join(", ") : "N/A";
-  const regionStr = subregion ? `${region} · ${subregion}` : region;
-
-  return {
-    intro: `You’re viewing a country-level brief for ${name}. It combines live country data with a safety-oriented overlay focused on solo travel.`,
-    region: `Region: ${regionStr}. This is a high-level orientation rather than a detailed neighborhood map.`,
-    facts: {
-      capital: capital || "N/A",
-      population: populationStr,
-      languages: langStr,
-      currency: currencyStr
+  // countryMeta 来自 REST Countries 的单个国家对象
+  function buildCountryProfileText(countryMeta) {
+    if (!countryMeta) {
+      return {
+        intro:
+          "We couldn’t load this country’s profile. Please check your network or try another country.",
+        region: "Region information is currently unavailable.",
+        facts: {
+          capital: "Unknown",
+          population: "Unknown",
+          languages: "Unknown",
+          currency: "Unknown",
+        },
+      };
     }
-  };
-}
 
-// safety 是你从 COUNTRY_SAFETY 里找出来的 JSON（可能为 null）
-function buildSafetySnapshotText(safety) {
-  if (!safety) {
+    const name = countryMeta.name?.common ?? "this country";
+    const region = countryMeta.region ?? "Unknown region";
+    const subregion = countryMeta.subregion;
+    const pop = countryMeta.population;
+    const capital = Array.isArray(countryMeta.capital)
+      ? countryMeta.capital[0]
+      : countryMeta.capital;
+
+    const languages = countryMeta.languages
+      ? Object.values(countryMeta.languages).slice(0, 3)
+      : [];
+
+    const currencies = countryMeta.currencies
+      ? Object.values(countryMeta.currencies)
+          .map((c) => c.name)
+          .slice(0, 2)
+      : [];
+
+    const populationStr = pop ? `${(pop / 1_000_000).toFixed(1)}M` : "N/A";
+
+    const langStr = languages.length ? languages.join(", ") : "N/A";
+    const currencyStr = currencies.length ? currencies.join(", ") : "N/A";
+    const regionStr = subregion ? `${region} · ${subregion}` : region;
+
     return {
-      header:
-        "Risk levels are currently unknown for this country in your preset.",
-      advisory:
-        "Risk levels can vary across regions within the same country, and can change over time. This interface is a simplified, education-oriented view built on top of live country data and your curated safety presets."
+      intro: `You’re viewing a country-level brief for ${name}. It combines live country data with a safety-oriented overlay focused on solo travel.`,
+      region: `Region: ${regionStr}. This is a high-level orientation rather than a detailed neighborhood map.`,
+      facts: {
+        capital: capital || "N/A",
+        population: populationStr,
+        languages: langStr,
+        currency: currencyStr,
+      },
     };
   }
 
-  const parts = [];
+  // safety 是你从 COUNTRY_SAFETY 里找出来的 JSON（可能为 null）
+  function buildSafetySnapshotText(safety) {
+    if (!safety) {
+      return {
+        header:
+          "Risk levels are currently unknown for this country in your preset.",
+        advisory:
+          "Risk levels can vary across regions within the same country, and can change over time. This interface is a simplified, education-oriented view built on top of live country data and your curated safety presets.",
+      };
+    }
 
-  const s = safety; // 方便写
+    const parts = [];
 
-  if (s.crime != null) {
-    parts.push(
-      `Crime and petty theft are at a level of ${scoreToLabel(s.crime)} for solo travelers.`
-    );
+    const s = safety; // 方便写
+
+    if (s.crime != null) {
+      parts.push(
+        `Crime and petty theft are at a level of ${scoreToLabel(
+          s.crime
+        )} for solo travelers.`
+      );
+    }
+    if (s.politics != null) {
+      parts.push(
+        `Political environment shows ${scoreToLabel(
+          s.politics
+        )} sensitivity in terms of protests or policy shifts.`
+      );
+    }
+    if (s.health != null) {
+      parts.push(
+        `Health infrastructure and access sit around a ${scoreToLabel(
+          s.health
+        )} level of strain.`
+      );
+    }
+    if (s.natural != null) {
+      parts.push(
+        `Exposure to natural hazards (e.g. earthquakes, storms) is ${scoreToLabel(
+          s.natural
+        )}.`
+      );
+    }
+
+    return {
+      header: parts.join(" "),
+      advisory:
+        "This is a calm, education-focused snapshot. For real-world travel, always cross-check with official travel advisories and local guidance.",
+    };
   }
-  if (s.politics != null) {
-    parts.push(
-      `Political environment shows ${scoreToLabel(
-        s.politics
-      )} sensitivity in terms of protests or policy shifts.`
-    );
+
+  // 把 1–5 分转成 label
+  function scoreToLabel(score) {
+    if (score == null) return "no visible";
+    if (score <= 2) return "relatively low";
+    if (score === 3) return "moderate";
+    return "heightened";
   }
-  if (s.health != null) {
-    parts.push(
-      `Health infrastructure and access sit around a ${scoreToLabel(
-        s.health
-      )} level of strain.`
-    );
-  }
-  if (s.natural != null) {
-    parts.push(
-      `Exposure to natural hazards (e.g. earthquakes, storms) is ${scoreToLabel(
-        s.natural
-      )}.`
-    );
-  }
-
-  return {
-    header: parts.join(" "),
-    advisory:
-      "This is a calm, education-focused snapshot. For real-world travel, always cross-check with official travel advisories and local guidance."
-  };
-}
-
-// 把 1–5 分转成 label
-function scoreToLabel(score) {
-  if (score == null) return "no visible";
-  if (score <= 2) return "relatively low";
-  if (score === 3) return "moderate";
-  return "heightened";
-}
-
-
-
-
-
 
   // ---------- Render: Country Info ----------
   function renderCountryInfo(country) {
     if (!country) return;
     const { api, safety, usedFallback } = country;
-    const summaryEl = $("#info-country-summary");
+    console.log(`[DEBUG] renderCountryInfo called for ${api.name}:`, {
+      safety,
+      safety_risk_scores: safety?.risk_scores,
+      safety_overall_risk: safety?.overall_risk,
+    });
+
+    const introEl = $("#country-profile-intro");
+    const regionEl = $("#country-profile-region");
     const metaEl = $("#info-country-meta");
     const riskChip = $("#info-risk-chip");
     const riskBars = $("#info-risk-bars");
-    const advisory = $("#info-advisory-text");
+    const advisory = $("#safety-advisory");
 
     // Summary
-    if (summaryEl) {
-      const regionText = api.region
-        ? api.region +
-          (api.subregion ? ` · ${api.subregion}` : "")
-        : safety.region || "Region not specified";
-
+    if (introEl) {
       const usedText = usedFallback
         ? `<span class="tn-placeholder">Showing demo profile for ${escapeHtml(
             safety.name || api.name
@@ -529,39 +534,36 @@ function scoreToLabel(score) {
         : "";
 
       setHTML(
-        summaryEl,
-        `
-        <p class="tn-section-text">
-          You’re viewing a country-level brief for <strong>${escapeHtml(
-            api.name
-          )}</strong>. It combines live country data with a safety-oriented overlay focused on solo travel.
-        </p>
-        <p class="tn-section-text">
-          Region: ${escapeHtml(
-            regionText
-          )}. This is a high-level orientation rather than a detailed neighborhood map.
-        </p>
-        ${usedText}
-      `
+        introEl,
+        `You're viewing a country-level brief for <strong>${escapeHtml(
+          api.name
+        )}</strong>. It combines live country data with a safety-oriented overlay focused on solo travel. ${usedText}`
+      );
+    }
+
+    if (regionEl) {
+      const regionText = api.region
+        ? api.region + (api.subregion ? ` · ${api.subregion}` : "")
+        : safety.region || "Region not specified";
+
+      setText(
+        regionEl,
+        `Region: ${escapeHtml(
+          regionText
+        )}. This is a high-level orientation rather than a detailed neighborhood map.`
       );
     }
 
     // Meta list
     if (metaEl) {
-      const langs = api.languages.length
-        ? api.languages.join(", ")
-        : "N/A";
-      const currs = api.currencies.length
-        ? api.currencies.join(", ")
-        : "N/A";
+      const langs = api.languages.length ? api.languages.join(", ") : "N/A";
+      const currs = api.currencies.length ? api.currencies.join(", ") : "N/A";
 
       metaEl.innerHTML = `
         <ul class="tn-country-meta-list">
           <li class="tn-country-meta-item">
             <span class="tn-meta-label">Capital</span>
-            <span class="tn-meta-value">${escapeHtml(
-              api.capital
-            )}</span>
+            <span class="tn-meta-value">${escapeHtml(api.capital)}</span>
           </li>
           <li class="tn-country-meta-item">
             <span class="tn-meta-label">Population</span>
@@ -571,15 +573,11 @@ function scoreToLabel(score) {
           </li>
           <li class="tn-country-meta-item">
             <span class="tn-meta-label">Languages</span>
-            <span class="tn-meta-value">${escapeHtml(
-              langs
-            )}</span>
+            <span class="tn-meta-value">${escapeHtml(langs)}</span>
           </li>
           <li class="tn-country-meta-item">
             <span class="tn-meta-label">Currencies</span>
-            <span class="tn-meta-value">${escapeHtml(
-              currs
-            )}</span>
+            <span class="tn-meta-value">${escapeHtml(currs)}</span>
           </li>
         </ul>
       `;
@@ -607,32 +605,42 @@ function scoreToLabel(score) {
     // Risk bars
     if (riskBars) {
       const scores = safety.risk_scores || {};
+      console.log(
+        `[DEBUG] Rendering risk bars for ${safety.name || api.name}:`,
+        {
+          scores,
+          overall_risk: safety.overall_risk,
+          safety_keys: Object.keys(safety),
+        }
+      );
+
       const dims = [
         {
           key: "crime",
-          label: "Crime / petty theft"
+          label: "Crime / petty theft",
         },
         {
           key: "political",
-          label: "Political stability"
+          label: "Political stability",
         },
         {
           key: "health",
-          label: "Health infrastructure"
+          label: "Health infrastructure",
         },
         {
           key: "natural_disaster",
-          label: "Natural hazards"
-        }
+          label: "Natural hazards",
+        },
       ];
 
       riskBars.innerHTML = dims
         .map((d) => {
-          const scoreRaw = scores[d.key] || 3;
-          const score = Math.max(
-            1,
-            Math.min(5, scoreRaw)
+          const scoreRaw = scores[d.key];
+          console.log(
+            `[DEBUG] ${d.key}: scoreRaw=${scoreRaw}, type=${typeof scoreRaw}`
           );
+          const score =
+            scoreRaw != null ? Math.max(1, Math.min(5, Number(scoreRaw))) : 3;
           const pct = (score / 5) * 100;
           return `
           <div class="tn-country-meta-item">
@@ -690,25 +698,25 @@ function scoreToLabel(score) {
 
   // ---------- Render: Crisis Info ----------
   // ---------- Render: Crisis Info ----------
-function renderCrisisInfo(country) {
-  if (!country) return;
-  const { api, safety } = country;
+  function renderCrisisInfo(country) {
+    if (!country) return;
+    const { api, safety } = country;
 
-  const overview = $("#crisis-overview");
-  const contacts = $("#crisis-contacts");
-  const playbook = $("#crisis-playbook");
-  const aiAnswer = $("#crisis-ai-answer");
+    const overview = $("#crisis-overview");
+    const contacts = $("#crisis-contacts");
+    const playbook = $("#crisis-playbook");
+    const aiAnswer = $("#crisis-ai-answer");
 
-  if (!overview || !contacts || !playbook || !aiAnswer) return;
+    if (!overview || !contacts || !playbook || !aiAnswer) return;
 
-  const name = safety.name || api.name;
-  const code = safety.code || api.code;
+    const name = safety.name || api.name;
+    const code = safety.code || api.code;
 
-  // ===== 1. 非核心国家：Basic 模式 =====
-  if (!isCoreCountry(code)) {
-    setHTML(
-      overview,
-      `
+    // ===== 1. 非核心国家：Basic 模式 =====
+    if (!isCoreCountry(code)) {
+      setHTML(
+        overview,
+        `
       <p class="tn-section-text">
         You’re viewing a basic safety view for <strong>${escapeHtml(
           name
@@ -719,35 +727,35 @@ function renderCrisisInfo(country) {
         and use general solo travel safety habits (keep valuables close, stay in well-lit public areas, and share your plans with someone you trust).
       </p>
     `
-    );
-    // 不展示详细 playbook / contacts，避免假数据
-    setHTML(
-      playbook,
-      '<p class="tn-placeholder">A detailed crisis playbook is not yet available for this country. Use the general guidance above as a baseline.</p>'
-    );
-    contacts.innerHTML = "";
-    setHTML(
-      aiAnswer,
-      '<p class="tn-placeholder">Describe what is happening, and we’ll generate guidance here once this country has a detailed playbook. For now, follow general safety steps and official advisories.</p>'
-    );
-    return;
-  }
+      );
+      // 不展示详细 playbook / contacts，避免假数据
+      setHTML(
+        playbook,
+        '<p class="tn-placeholder">A detailed crisis playbook is not yet available for this country. Use the general guidance above as a baseline.</p>'
+      );
+      contacts.innerHTML = "";
+      setHTML(
+        aiAnswer,
+        '<p class="tn-placeholder">Describe what is happening, and we’ll generate guidance here once this country has a detailed playbook. For now, follow general safety steps and official advisories.</p>'
+      );
+      return;
+    }
 
-  // ===== 2. 核心国家：Rich 模式 =====
+    // ===== 2. 核心国家：Rich 模式 =====
 
-  // 2.1 Overview + advisory excerpt + mindset + top risks
-  const risks = safety.top_risks || [];
-  const chips = risks
-    .slice(0, 3)
-    .map(
-      (r) =>
-        `<span class="tn-chip tn-chip-soft" style="margin-right:4px;">${escapeHtml(
-          r
-        )}</span>`
-    )
-    .join("");
+    // 2.1 Overview + advisory excerpt + mindset + top risks
+    const risks = safety.top_risks || [];
+    const chips = risks
+      .slice(0, 3)
+      .map(
+        (r) =>
+          `<span class="tn-chip tn-chip-soft" style="margin-right:4px;">${escapeHtml(
+            r
+          )}</span>`
+      )
+      .join("");
 
-  let overviewHtml = `
+    let overviewHtml = `
     <p class="tn-section-text">
       You’re viewing <strong>${escapeHtml(
         name
@@ -758,9 +766,9 @@ function renderCrisisInfo(country) {
     </p>
   `;
 
-  // 来自真实 API 的摘要 + 链接
-  if (safety.advisory_excerpt) {
-    overviewHtml += `
+    // 来自真实 API 的摘要 + 链接
+    if (safety.advisory_excerpt) {
+      overviewHtml += `
       <p class="tn-advisory-note">
         Based on the latest advisory:
         <span class="tn-advisory-quote">“${escapeHtml(
@@ -777,13 +785,13 @@ function renderCrisisInfo(country) {
         }
       </p>
     `;
-  }
+    }
 
-  if (chips) {
-    overviewHtml += `<div style="margin-top:4px;">${chips}</div>`;
-  }
+    if (chips) {
+      overviewHtml += `<div style="margin-top:4px;">${chips}</div>`;
+    }
 
-  overviewHtml += `
+    overviewHtml += `
     <p class="tn-section-text" style="margin-top:6px;">
       Mindset reminder: ${
         safety.mindset_tip
@@ -793,19 +801,17 @@ function renderCrisisInfo(country) {
     </p>
   `;
 
-  setHTML(overview, overviewHtml);
+    setHTML(overview, overviewHtml);
 
-  // 2.2 Contacts：对核心国家展示我们精细整理过的号码
-  const c = safety.emergency_contacts || {};
-  contacts.innerHTML = `
+    // 2.2 Contacts：对核心国家展示我们精细整理过的号码
+    const c = safety.emergency_contacts || {};
+    contacts.innerHTML = `
     <ul class="tn-crisis-contacts-list">
       ${
         c.unified
           ? `<li class="tn-crisis-contacts-item">
               <span class="tn-meta-label">Unified</span>
-              <span class="tn-meta-value">${escapeHtml(
-                c.unified
-              )}</span>
+              <span class="tn-meta-value">${escapeHtml(c.unified)}</span>
              </li>`
           : ""
       }
@@ -837,27 +843,22 @@ function renderCrisisInfo(country) {
     </ul>
   `;
 
-  // 2.3 Playbook（用你已有的结构，只是搬过来）
-  const pb = safety.playbook || {};
-  const entries = Object.values(pb);
-  if (!entries.length) {
-    setHTML(
-      playbook,
-      '<p class="tn-placeholder">We don’t have scenario-specific steps for this country yet. For the demo, try France, Japan or Italy.</p>'
-    );
-  } else {
-    playbook.innerHTML = entries
-      .slice(0, 3)
-      .map((scenario) => {
-        const steps = (scenario.steps || [])
-          .map(
-            (s) =>
-              `<li class="tn-playbook-item">${escapeHtml(
-                s
-              )}</li>`
-          )
-          .join("");
-        return `
+    // 2.3 Playbook（用你已有的结构，只是搬过来）
+    const pb = safety.playbook || {};
+    const entries = Object.values(pb);
+    if (!entries.length) {
+      setHTML(
+        playbook,
+        '<p class="tn-placeholder">We don’t have scenario-specific steps for this country yet. For the demo, try France, Japan or Italy.</p>'
+      );
+    } else {
+      playbook.innerHTML = entries
+        .slice(0, 3)
+        .map((scenario) => {
+          const steps = (scenario.steps || [])
+            .map((s) => `<li class="tn-playbook-item">${escapeHtml(s)}</li>`)
+            .join("");
+          return `
           <div class="tn-section-block">
             <div class="tn-playbook-scenario-title">${escapeHtml(
               scenario.label
@@ -867,17 +868,16 @@ function renderCrisisInfo(country) {
             </ul>
           </div>
         `;
-      })
-      .join("");
+        })
+        .join("");
+    }
+
+    // 2.4 AI Q&A placeholder（核心国家）
+    setHTML(
+      aiAnswer,
+      '<p class="tn-placeholder">Describe what is happening, and we’ll generate a short paragraph using this country’s playbook. This is all client-side for now, but mirrors an AI assistant UX.</p>'
+    );
   }
-
-  // 2.4 AI Q&A placeholder（核心国家）
-  setHTML(
-    aiAnswer,
-    '<p class="tn-placeholder">Describe what is happening, and we’ll generate a short paragraph using this country’s playbook. This is all client-side for now, but mirrors an AI assistant UX.</p>'
-  );
-}
-
 
   // ---------- Crisis Q&A (mock AI) ----------
   function setupCrisisQnA() {
@@ -889,8 +889,7 @@ function renderCrisisInfo(country) {
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const text =
-        input.value && input.value.trim();
+      const text = input.value && input.value.trim();
       if (!currentCountry) {
         setHTML(
           answerEl,
@@ -906,16 +905,8 @@ function renderCrisisInfo(country) {
         return;
       }
 
-      const resp = generateMockGuidance(
-        currentCountry,
-        text
-      );
-      setHTML(
-        answerEl,
-        `<p class="tn-section-text">${escapeHtml(
-          resp
-        )}</p>`
-      );
+      const resp = generateMockGuidance(currentCountry, text);
+      setHTML(answerEl, `<p class="tn-section-text">${escapeHtml(resp)}</p>`);
     });
   }
 
@@ -927,57 +918,26 @@ function renderCrisisInfo(country) {
     const pb = safety.playbook || {};
     let scenarioKey = null;
 
-    if (
-      /passport|id|identity|visa/.test(q)
-    ) {
-      scenarioKey =
-        pb.lost_passport
-          ? "lost_passport"
-          : pb.theft
-          ? "theft"
-          : null;
-    } else if (
-      /theft|stolen|pickpocket|robbed|bag/.test(
-        q
-      )
-    ) {
-      scenarioKey =
-        pb.theft
-          ? "theft"
-          : pb.lost_passport
-          ? "lost_passport"
-          : null;
-    } else if (
-      /protest|demonstration|strike|riot|unrest/.test(
-        q
-      )
-    ) {
-      scenarioKey =
-        pb.protest_or_strike
-          ? "protest_or_strike"
-          : null;
-    } else if (
-      /earthquake|shake|tremor|quake/.test(
-        q
-      )
-    ) {
-      scenarioKey = pb.earthquake
-        ? "earthquake"
+    if (/passport|id|identity|visa/.test(q)) {
+      scenarioKey = pb.lost_passport
+        ? "lost_passport"
+        : pb.theft
+        ? "theft"
         : null;
-    } else if (
-      /heat|hot|sun|sunburn/.test(q)
-    ) {
-      scenarioKey = pb.heat_wave
-        ? "heat_wave"
+    } else if (/theft|stolen|pickpocket|robbed|bag/.test(q)) {
+      scenarioKey = pb.theft
+        ? "theft"
+        : pb.lost_passport
+        ? "lost_passport"
         : null;
-    } else if (
-      /sick|ill|fever|injury|hurt|hospital/.test(
-        q
-      )
-    ) {
-      scenarioKey = pb.health_issue
-        ? "health_issue"
-        : null;
+    } else if (/protest|demonstration|strike|riot|unrest/.test(q)) {
+      scenarioKey = pb.protest_or_strike ? "protest_or_strike" : null;
+    } else if (/earthquake|shake|tremor|quake/.test(q)) {
+      scenarioKey = pb.earthquake ? "earthquake" : null;
+    } else if (/heat|hot|sun|sunburn/.test(q)) {
+      scenarioKey = pb.heat_wave ? "heat_wave" : null;
+    } else if (/sick|ill|fever|injury|hurt|hospital/.test(q)) {
+      scenarioKey = pb.health_issue ? "health_issue" : null;
     }
 
     if (scenarioKey && pb[scenarioKey]) {
@@ -985,8 +945,12 @@ function renderCrisisInfo(country) {
       const step1 = sc.steps?.[0] || "";
       const step2 = sc.steps?.[1] || "";
       const step3 = sc.steps?.[2] || "";
-      return `You’re in ${name}, and it sounds like you’re going through a situation similar to “${sc.label}”. First, ${step1} Then, ${step2} If you still feel unsafe or unsure after these first steps, ${step3 ||
-        "move to a busier, well-lit place and consider calling local emergency services or your embassy for support"} Remember you don’t need to solve everything at once – just one safe next step at a time is enough.`;
+      return `You’re in ${name}, and it sounds like you’re going through a situation similar to “${
+        sc.label
+      }”. First, ${step1} Then, ${step2} If you still feel unsafe or unsure after these first steps, ${
+        step3 ||
+        "move to a busier, well-lit place and consider calling local emergency services or your embassy for support"
+      } Remember you don’t need to solve everything at once – just one safe next step at a time is enough.`;
     }
 
     // Generic fallback
@@ -1004,242 +968,57 @@ function renderCrisisInfo(country) {
       .replace(/'/g, "&#039;");
   }
 
+  // ---------- USC Support Demo ----------
+  const USC_SUPPORT_DEMO = {
+    intro:
+      "When the traveler is a USC student, TravelSafe can attach USC-specific safety resources on top of the country view.",
+    emergency: "+1 (213) 740-4321 (USC Department of Public Safety, demo)",
+    insurance: "USC Student Health Insurance (demo link)",
+    providers:
+      "Pre-approved international medical providers list (demo placeholder).",
+    embassy:
+      "Nearest U.S. embassy / consulate contact details based on destination city (future integration).",
+    advisories:
+      "Region-specific advisories sourced from official government travel pages.",
+    travelerReg:
+      "USC / U.S. State Department traveler registration (e.g. STEP).",
+    note: "This is a demo card using static USC-style data. In production, it can be wired to OIS / USC APIs and updated automatically.",
+  };
+
+  function renderUSCSupportDemo() {
+    const data = USC_SUPPORT_DEMO;
+
+    const introEl = $("#usc-layer-intro");
+    const emerEl = $("#usc-emergency");
+    const insEl = $("#usc-insurance");
+    const provEl = $("#usc-providers");
+    const embEl = $("#usc-embassy");
+    const advEl = $("#usc-advisories");
+    const regEl = $("#usc-traveler-reg");
+    const noteEl = $("#usc-layer-note");
+
+    if (!introEl) return; // 卡片不存在就直接返回，防止报错
+
+    setText(introEl, data.intro);
+    setText(emerEl, data.emergency);
+    setText(insEl, data.insurance);
+    setText(provEl, data.providers);
+    setText(embEl, data.embassy);
+    setText(advEl, data.advisories);
+    setText(regEl, data.travelerReg);
+    setText(noteEl, data.note);
+  }
+
   // ---------- Init ----------
-document.addEventListener("DOMContentLoaded", () => {
-  loadCountrySafetyJson()
-    .catch((e) => console.error(e))
-    .finally(() => {
-      setupTabs();
-      setupSearch();
-      setupCrisisQnA();
-      renderNoCountrySelected();
-    });
-});
-
+  document.addEventListener("DOMContentLoaded", () => {
+    loadCountrySafetyJson()
+      .catch((e) => console.error(e))
+      .finally(() => {
+        setupTabs();
+        setupSearch();
+        setupCrisisQnA();
+        renderNoCountrySelected();
+        renderUSCSupportDemo();
+      });
+  });
 })();
-
-// Risk chip
-    if (riskChip) {
-      let overall = safety.overall_risk || "unknown";
-      overall = String(overall).trim().toLowerCase(); // ✅ 统一转成小写
-
-      let label = "Risk: Unknown";
-      let cls = "tn-badge tn-badge-neutral";
-      if (overall === "low") {
-        label = "Risk: Low for most trips";
-        cls = "tn-badge tn-badge-low";
-      } else if (overall === "medium") {
-        label = "Risk: Mixed · stay aware";
-        cls = "tn-badge tn-badge-medium";
-      } else if (overall === "high") {
-        label = "Risk: High · check advisories";
-        cls = "tn-badge tn-badge-high";
-      }
-      riskChip.className = cls;
-      setText(riskChip, label);
-    }
-
-    function buildCountryProfileText(countryMeta) {
-  if (!countryMeta) {
-    return "We couldn’t load this country’s profile. Please check your network or try another country.";
-  }
-
-  const name = countryMeta.name?.common ?? "this country";
-  const region = countryMeta.region ?? "Unknown region";
-  const subregion = countryMeta.subregion;
-  const pop = countryMeta.population;
-  const languages = countryMeta.languages
-    ? Object.values(countryMeta.languages).slice(0, 3)
-    : [];
-
-  const populationStr = pop
-    ? `${(pop / 1_000_000).toFixed(1)}M people`
-    : "Population data not available";
-
-  const langStr = languages.length
-    ? languages.join(", ")
-    : "No language data";
-
-  const regionStr = subregion ? `${region} · ${subregion}` : region;
-
-  return {
-    intro: `You’re viewing a country-level brief for ${name}. It combines live country data with a safety-oriented overlay focused on solo travel.`,
-    region: `Region: ${regionStr}. This is a high-level orientation rather than a detailed neighborhood map.`,
-    facts: {
-      population: populationStr,
-      languages: langStr
-    }
-  };
-}
-
-function scoreToLabel(score) {
-  if (score == null) return "no data";
-  if (score <= 2) return "relatively low risk";
-  if (score === 3) return "moderate risk";
-  return "heightened risk";
-}
-
-function buildSafetySnapshotText(safety) {
-  if (!safety) {
-    return {
-      header: "Risk levels are currently unknown for this country in your preset.",
-      advisory:
-        "Risk levels can vary across regions within the same country, and can change over time. This interface is a simplified, education-oriented view built on top of live country data and your curated safety presets."
-    };
-  }
-
-  const parts = [];
-
-  if (safety.crime != null) {
-    parts.push(`Crime and petty theft are ${scoreToLabel(safety.crime)}.`);
-  }
-  if (safety.politics != null) {
-    parts.push(`Political stability is ${scoreToLabel(5 - safety.politics)} in terms of disruptions.`);
-  }
-  if (safety.health != null) {
-    parts.push(`Health infrastructure sits at a ${scoreToLabel(5 - safety.health)} level of strain.`);
-  }
-  if (safety.natural != null) {
-    parts.push(`Exposure to natural hazards is ${scoreToLabel(safety.natural)}.`);
-  }
-
-  return {
-    header: parts.join(" "),
-    advisory:
-      "Risk levels can vary across regions within the same country, and can change over time. This view is a calm, education-focused snapshot built on your current presets. For real travel, always double-check official travel advisories."
-  };
-}
-
-// =============== Render: data -> DOM ===============
-function renderCountryInfo(countryMeta, safety) {
-  const profileText = buildCountryProfileText(countryMeta);
-  const safetyText = buildSafetySnapshotText(safety);
-
-  // Profile 文案
-  const elIntro = document.getElementById("country-profile-intro");
-  const elRegion = document.getElementById("country-profile-region");
-  const elCapital = document.getElementById("country-capital");
-  const elPop = document.getElementById("country-population");
-  const elLang = document.getElementById("country-languages");
-  const elCurrency = document.getElementById("country-currency");
-
-  if (elIntro) elIntro.textContent = profileText.intro;
-  if (elRegion) elRegion.textContent = profileText.region;
-  if (elCapital) elCapital.textContent = profileText.facts.capital;
-  if (elPop) elPop.textContent = profileText.facts.population;
-  if (elLang) elLang.textContent = profileText.facts.languages;
-  if (elCurrency) elCurrency.textContent = profileText.facts.currency;
-
-  // Safety 文案
-  const elSafetyHeader = document.getElementById("safety-header");
-  const elSafetyAdvisory = document.getElementById("safety-advisory");
-  if (elSafetyHeader) elSafetyHeader.textContent = safetyText.header;
-  if (elSafetyAdvisory) elSafetyAdvisory.textContent = safetyText.advisory;
-
-  // ⚠️ 如果你有右上角 Risk pill 和 progress bar，这里也可以顺便更新
-  updateSafetyScoreUI(safety);
-}
-
-// 可选：更新右边那几个 3/5 的进度条 + Risk pill
-function updateSafetyScoreUI(safety) {
-  const pill = document.getElementById("risk-pill-label");
-  if (!safety) {
-    if (pill) pill.textContent = "Unknown";
-    // 清空进度条之类
-    return;
-  }
-
-  const avg =
-    (safety.crime + safety.politics + safety.health + safety.natural) / 4;
-  if (pill) pill.textContent = `${avg.toFixed(1)}/5`;
-
-  // 这里看你现在的 DOM 结构，比如：
-  // document.getElementById("bar-crime").style.width = (safety.crime / 5) * 100 + "%";
-}
-
-async function handleCountrySearch() {
-  const input = document.getElementById("country-input");
-  if (!input) return;
-
-  const raw = input.value || "";
-  const query = raw.trim();
-  if (!query) return;
-
-  try {
-    // 1. 拉 meta
-    const meta = await fetchCountryMeta(query);
-
-    // 2. 找 safety
-    const safety = findSafetyForCountry(meta);
-
-    // 3. 渲染
-    renderCountryInfo(meta, safety);
-  } catch (err) {
-    console.error("Search error:", err);
-    // 简单 fallback
-    renderCountryInfo(null, null);
-  }
-}
-
-// 初始化时绑一下按钮
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("btn-search");
-  if (btn) {
-    btn.addEventListener("click", handleCountrySearch);
-  }
-
-  // Demo: 默认直接加载一次 China
-  handleCountrySearchDefault("China");
-});
-
-async function handleCountrySearchDefault(countryName) {
-  try {
-    const meta = await fetchCountryMeta(countryName);
-    const safety = findSafetyForCountry(meta);
-    renderCountryInfo(meta, safety);
-  } catch (e) {
-    console.error("Default load error:", e);
-  }
-}
-
-// ===== USC support demo data (stub) =====
-const USC_SUPPORT_DEMO = {
-  intro:
-    "When the traveler is a USC student, TravelSafe can attach USC-specific safety resources on top of the country view.",
-  emergency: "+1 (213) 740-4321 (USC Department of Public Safety, demo)",
-  insurance: "USC Student Health Insurance (demo link)",
-  providers:
-    "Pre-approved international medical providers list (demo placeholder).",
-  embassy:
-    "Nearest U.S. embassy / consulate contact details based on destination city (future integration).",
-  advisories:
-    "Region-specific advisories sourced from official government travel pages.",
-  travelerReg:
-    "USC / U.S. State Department traveler registration (e.g. STEP).",
-  note:
-    "This is a demo card using static USC-style data. In production, it can be wired to OIS / USC APIs and updated automatically."
-};
-
-function renderUSCSupportDemo() {
-  const data = USC_SUPPORT_DEMO;
-
-  const introEl = document.getElementById("usc-layer-intro");
-  const emerEl = document.getElementById("usc-emergency");
-  const insEl = document.getElementById("usc-insurance");
-  const provEl = document.getElementById("usc-providers");
-  const embEl = document.getElementById("usc-embassy");
-  const advEl = document.getElementById("usc-advisories");
-  const regEl = document.getElementById("usc-traveler-reg");
-  const noteEl = document.getElementById("usc-layer-note");
-
-  if (!introEl) return; // 卡片不存在就直接返回，防止报错
-
-  introEl.textContent = data.intro;
-  emerEl.textContent = data.emergency;
-  insEl.textContent = data.insurance;
-  provEl.textContent = data.providers;
-  embEl.textContent = data.embassy;
-  advEl.textContent = data.advisories;
-  regEl.textContent = data.travelerReg;
-  noteEl.textContent = data.note;
-}
