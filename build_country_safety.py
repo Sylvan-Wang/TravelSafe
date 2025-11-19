@@ -41,185 +41,8 @@ RISK_KEYWORDS = {
     "natural disaster": "natural hazards",
 }
 
-# 你的手动 safety preset（可逐步扩展）
-MANUAL_SAFETY_PRESETS = {
-    "FR": {
-        "overall_risk": "medium",
-        "risk_scores": {
-            "crime": 3,
-            "political": 2,
-            "health": 1,
-            "natural_disaster": 2,
-        },
-        "top_risks": [
-            "petty theft in crowded areas",
-            "transport strikes & delays",
-            "tourist scams around landmarks",
-        ],
-        "emergency_contacts": {
-            "police": "17 (or 112 EU emergency)",
-            "ambulance": "15 (or 112)",
-            "fire": "18 (or 112)",
-            "note": "In practice, 112 works across the EU for any emergency.",
-        },
-        "mindset_tip": (
-            "Most trips to France are smooth. Stay aware in busy tourist spots, "
-            "keep valuables close, and give yourself extra time for transport disruptions."
-        ),
-        "playbook": {
-            "lost_passport": {
-                "label": "Lost passport or stolen bag",
-                "steps": [
-                    "Move to a safe, well-lit place away from the incident area.",
-                    "Call your card providers to freeze cards and secure online accounts.",
-                    "File a police report and get a written statement.",
-                    "Contact your embassy or consulate with the police report.",
-                    "Use printed or offline copies of bookings and IDs while things are being reissued.",
-                ],
-            },
-            "protest_or_strike": {
-                "label": "Protests, strikes or sudden disruption",
-                "steps": [
-                    "Avoid crowds and demonstrations, even if they look peaceful.",
-                    "Check transport apps and airline / train notifications.",
-                    "Have one backup way to reach your accommodation.",
-                    "Keep a calm distance from police lines.",
-                    "Let someone you trust know where you are.",
-                ],
-            },
-        },
-    },
-    "JP": {
-        "overall_risk": "low",
-        "risk_scores": {
-            "crime": 1,
-            "political": 1,
-            "health": 1,
-            "natural_disaster": 3,
-        },
-        "top_risks": [
-            "earthquakes and typhoons",
-            "language barrier in emergencies",
-            "lost items on crowded trains",
-        ],
-        "emergency_contacts": {
-            "police": "110",
-            "ambulance": "119",
-            "fire": "119",
-            "note": "Point to a map or use simple English; many officers have basic English.",
-        },
-        "mindset_tip": (
-            "Japan is generally very safe. Stay weather-aware and know basic earthquake reactions."
-        ),
-        "playbook": {
-            "earthquake": {
-                "label": "Earthquake while you're outside or on transport",
-                "steps": [
-                    "Stay calm and protect your head.",
-                    "Hold onto straps or poles on trains and wait for staff instructions.",
-                    "Avoid elevators right after a quake.",
-                    "Follow official announcements and signage.",
-                ],
-            },
-            "lost_items": {
-                "label": "Lost phone, wallet or bag",
-                "steps": [
-                    "Retrace your last steps and ask staff at the nearest station / shop.",
-                    "Use device locator features if available.",
-                    "File a lost item report at a police box (kōban) or station office.",
-                    "Note time, place and train details if relevant.",
-                ],
-            },
-        },
-    },
-    "IT": {
-        "overall_risk": "medium",
-        "risk_scores": {
-            "crime": 3,
-            "political": 2,
-            "health": 1,
-            "natural_disaster": 2,
-        },
-        "top_risks": [
-            "pickpocketing in tourist hubs",
-            "heat waves in summer",
-            "transport delays or strikes",
-        ],
-        "emergency_contacts": {
-            "police": "112",
-            "ambulance": "118 (or 112)",
-            "fire": "115",
-            "note": "112 is the general EU emergency number.",
-        },
-        "mindset_tip": (
-            "Enjoy the streets and food, but keep your bag closed and in front of you in crowded places."
-        ),
-        "playbook": {
-            "theft": {
-                "label": "Pickpocketing or bag theft",
-                "steps": [
-                    "Move somewhere calmer, away from the immediate crowd.",
-                    "Lock or wipe your phone remotely if possible.",
-                    "Report the theft and obtain a written report.",
-                    "Contact your bank to block cards.",
-                ],
-            },
-            "heat_wave": {
-                "label": "Heat wave or heat exhaustion",
-                "steps": [
-                    "Get into shade or an air-conditioned space.",
-                    "Drink water slowly and avoid alcohol.",
-                    "Use wet cloths on neck and wrists to cool down.",
-                    "Seek medical help if you feel confused or very weak.",
-                ],
-            },
-        },
-    },
-    "CN": {
-        "overall_risk": "medium",
-        "risk_scores": {
-            "crime": 2,
-            "political": 3,
-            "health": 2,
-            "natural_disaster": 2,
-        },
-        "top_risks": [
-            "language barrier in emergencies",
-            "different legal system and procedures",
-            "air quality in some cities",
-        ],
-        "emergency_contacts": {
-            "police": "110",
-            "ambulance": "120",
-            "fire": "119",
-            "note": "English-speaking operators may not always be available. Have your address written in Chinese characters.",
-        },
-        "mindset_tip": (
-            "China is generally safe for tourists, but language barriers can make emergencies more challenging. "
-            "Keep your hotel address in Chinese, use translation apps, and stay aware of local customs."
-        ),
-        "playbook": {
-            "lost_passport": {
-                "label": "Lost passport or visa issues",
-                "steps": [
-                    "Report to the nearest police station and get a written report.",
-                    "Contact your embassy or consulate immediately (keep embassy contact info saved).",
-                    "Apply for a replacement passport or emergency travel document.",
-                    "Work with local authorities to resolve any visa issues.",
-                ],
-            },
-            "language_barrier": {
-                "label": "Language barrier in emergency",
-                "steps": [
-                    "Use translation apps (Google Translate, Baidu Translate) or show written Chinese.",
-                    "Call your hotel front desk - they usually have English speakers.",
-                    "Contact your embassy or consulate for assistance.",
-                    "Use universal gestures and show important documents (passport, hotel card).",
-                ],
-            },
-        },
-    },
-}
+# 手动 safety preset（已清空，所有数据来自API爬取）
+MANUAL_SAFETY_PRESETS = {}
 
 
 def html_to_text(html: str) -> str:
@@ -331,19 +154,67 @@ def build_advisory_index(records, rest_countries):
         name_lower = (c["name"] or "").strip().lower()
         if name_lower:
             name_to_code[name_lower] = code
+    
+    # 添加常见别名和变体
+    aliases = {
+        "burma": "MM",  # Myanmar
+        "myanmar": "MM",
+        "east timor": "TL",  # Timor-Leste
+        "timor-leste": "TL",
+        "czech republic": "CZ",
+        "czechia": "CZ",
+        "russia": "RU",
+        "russian federation": "RU",
+        "south korea": "KR",
+        "republic of korea": "KR",
+        "north korea": "KP",
+        "democratic people's republic of korea": "KP",
+        "ivory coast": "CI",
+        "cote d'ivoire": "CI",
+        "cote d ivoire": "CI",  # 处理空格变体
+        "cabo verde": "CV",
+        "cape verde": "CV",
+        "the bahamas": "BS",
+        "bahamas": "BS",
+        "the gambia": "GM",
+        "gambia": "GM",
+        "mexico": "MX",
+    }
+    for alias, code in aliases.items():
+        if code in rest_countries:  # 确保代码存在
+            name_to_code[alias.lower()] = code
+
+    def normalize_country_name(name):
+        """标准化国家名称以便匹配"""
+        if not name:
+            return ""
+        # 移除 "Travel Advisory" 后缀
+        name = name.replace("Travel Advisory", "").strip()
+        # 移除括号内容（如 "Burma (Myanmar)" -> "Burma"）
+        name = re.sub(r'\s*\([^)]*\)', '', name)
+        # 移除 "The " 前缀
+        name = re.sub(r'^the\s+', '', name, flags=re.IGNORECASE)
+        # 移除特殊字符和多余空格
+        name = re.sub(r'\s+', ' ', name).strip()
+        return name.lower()
+
+    matched_count = 0
+    unmatched = []
 
     for item in records:
         title = item.get("Title") or ""
         if not title:
             continue
 
-        # 例："South Sudan - Level 4: Do Not Travel"
-        parts = title.split(" - Level")
-        if len(parts) < 2:
+        # 例："South Sudan - Level 4: Do Not Travel" 或 "Mexico Travel Advisory"
+        # 先尝试按 " - Level" 分割
+        if " - Level" in title:
+            parts = title.split(" - Level")
+            country_name = parts[0].strip()
+            level_part = "Level" + parts[1]  # "Level 4: Do Not Travel"
+        else:
+            # 如果没有 " - Level"，可能是格式不同，跳过
             continue
-
-        country_name = parts[0].strip()
-        level_part = "Level" + parts[1]  # "Level 4: Do Not Travel"
 
         level_num = None
         for n in ["1", "2", "3", "4"]:
@@ -361,10 +232,41 @@ def build_advisory_index(records, rest_countries):
         else:
             overall = "high"
 
-        code = name_to_code.get(country_name.lower())
+        # 标准化国家名称并尝试匹配
+        normalized_name = normalize_country_name(country_name)
+        
+        # 处理包含多个地区的特殊情况（如 "Mainland China, Hong Kong & Macau"）
+        # 提取第一个主要国家名称
+        if "," in normalized_name or "&" in normalized_name:
+            # 取第一个部分，移除 "mainland", "see summaries" 等修饰词
+            first_part = normalized_name.split(",")[0].split("&")[0].strip()
+            first_part = re.sub(r'\bmainland\b', '', first_part, flags=re.IGNORECASE).strip()
+            first_part = re.sub(r'\bsee summaries\b', '', first_part, flags=re.IGNORECASE).strip()
+            if first_part:
+                normalized_name = first_part
+        
+        code = name_to_code.get(normalized_name)
+        
+        # 如果直接匹配失败，尝试部分匹配
         if not code:
+            # 先尝试精确匹配别名
+            for key, val in aliases.items():
+                if normalized_name == key or normalized_name in key or key in normalized_name:
+                    code = val
+                    break
+            
+            # 如果还是没找到，尝试模糊匹配
+            if not code:
+                for key, val in name_to_code.items():
+                    if normalized_name in key or key in normalized_name:
+                        code = val
+                        break
+        
+        if not code:
+            unmatched.append(country_name)
             continue
 
+        matched_count += 1
         index[code] = {
             "raw": level_part.strip(),
             "overall": overall,
@@ -373,6 +275,8 @@ def build_advisory_index(records, rest_countries):
         }
 
     print(f"Built advisory index for {len(index)} countries.")
+    if unmatched:
+        print(f"Unmatched ({len(unmatched)}): {', '.join(unmatched[:10])}")
     return index
 
 
