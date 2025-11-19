@@ -1,0 +1,253 @@
+code,name,region,subregion,population,capital,languages,currencies,name_safety,region_safety,overall_risk,crime_score,political_score,health_score,natural_disaster_score,is_core_country,name_normalized,country_normalized,homicide_rate
+SY,Syria,Asia,Western Asia,25620000,Damascus,Arabic,Syrian pound,Syria,Asia,high,4,4,3,3,False,syria,syria,2.073
+NZ,New Zealand,Oceania,Australia and New Zealand,5324700,Wellington,"English, Māori, New Zealand Sign Language",New Zealand dollar,New Zealand,Oceania,low,2,2,2,2,True,new zealand,,
+BN,Brunei,Asia,South-Eastern Asia,455500,Bandar Seri Begawan,Malay,"Brunei dollar, Singapore dollar",Brunei,Asia,low,2,2,2,2,False,brunei,brunei,0.486
+IO,British Indian Ocean Territory,Africa,Eastern Africa,0,Diego Garcia,English,United States dollar,British Indian Ocean Territory,Africa,unknown,3,3,3,3,False,british indian ocean territory,,
+KE,Kenya,Africa,Eastern Africa,53330978,Nairobi,"English, Swahili",Kenyan shilling,Kenya,Africa,medium,3,3,2,3,False,kenya,,
+PW,Palau,Oceania,Micronesia,16733,Ngerulmud,"English, Palauan",United States dollar,Palau,Oceania,low,2,2,2,2,False,palau,palau,11.195
+OM,Oman,Asia,Western Asia,5343630,Muscat,Arabic,Omani rial,Oman,Asia,medium,3,3,2,3,False,oman,,
+MX,Mexico,Americas,North America,130575786,Mexico City,Spanish,Mexican peso,Mexico,Americas,medium,3,3,2,3,True,mexico,,
+PS,Palestine,Asia,Western Asia,5483450,Ramallah,Arabic,"Egyptian pound, Israeli new shekel",Palestine,Asia,unknown,3,3,3,3,False,palestine,,
+TC,Turks and Caicos Islands,Americas,Caribbean,50828,Cockburn Town,English,United States dollar,Turks and Caicos Islands,Americas,medium,3,3,2,3,False,turks and caicos islands,turks and caicos islands,76.582
+CF,Central African Republic,Africa,Middle Africa,6470307,Bangui,"French, Sango",Central African CFA franc,Central African Republic,Africa,high,4,4,3,3,False,central african republic,,
+KN,Saint Kitts and Nevis,Americas,Caribbean,51320,Basseterre,English,Eastern Caribbean dollar,Saint Kitts and Nevis,Americas,low,2,2,2,2,False,saint kitts and nevis,,
+SS,South Sudan,Africa,Middle Africa,15786898,Juba,English,South Sudanese pound,South Sudan,Africa,high,4,4,3,3,False,south sudan,south sudan,14.054
+UA,Ukraine,Europe,Eastern Europe,32862000,Kyiv,Ukrainian,Ukrainian hryvnia,Ukraine,Europe,high,4,4,3,3,False,ukraine,,
+BL,Saint Barthélemy,Americas,Caribbean,10562,Gustavia,French,Euro,Saint Barthélemy,Americas,unknown,3,3,3,3,False,saint barthélemy,,
+NL,Netherlands,Europe,Western Europe,18100436,Amsterdam,Dutch,Euro,Netherlands,Europe,medium,3,3,2,3,True,netherlands,netherlands,0.691
+TZ,Tanzania,Africa,Eastern Africa,68153004,Dodoma,"English, Swahili",Tanzanian shilling,Tanzania,Africa,high,4,4,3,3,False,tanzania,tanzania,3.705
+CZ,Czechia,Europe,Central Europe,10882341,Prague,"Czech, Slovak",Czech koruna,Czechia,Europe,low,2,2,2,2,True,czechia,,
+BY,Belarus,Europe,Eastern Europe,9109280,Minsk,"Belarusian, Russian",Belarusian ruble,Belarus,Europe,high,4,4,3,3,False,belarus,,
+YE,Yemen,Asia,Western Asia,32684503,Sana'a,Arabic,Yemeni rial,Yemen,Asia,high,4,4,3,3,False,yemen,,
+SI,Slovenia,Europe,Central Europe,2130638,Ljubljana,Slovene,Euro,Slovenia,Europe,low,2,2,2,2,False,slovenia,,
+TK,Tokelau,Oceania,Polynesia,2608,Fakaofo,"English, Samoan, Tokelauan",New Zealand dollar,Tokelau,Oceania,unknown,3,3,3,3,False,tokelau,,
+NG,Nigeria,Africa,Western Africa,223800000,Abuja,English,Nigerian naira,Nigeria,Africa,high,4,4,3,3,False,nigeria,,
+RE,Réunion,Africa,Eastern Africa,896175,Saint-Denis,French,Euro,Réunion,Africa,unknown,3,3,3,3,False,réunion,réunion,1.699
+GP,Guadeloupe,Americas,Caribbean,378561,Basse-Terre,French,Euro,Guadeloupe,Americas,unknown,3,3,3,3,False,guadeloupe,,
+HU,Hungary,Europe,Central Europe,9539502,Budapest,Hungarian,Hungarian forint,Hungary,Europe,low,2,2,2,2,True,hungary,,
+HM,Heard Island and McDonald Islands,Antarctic,,0,N/A,English,N/A,Heard Island and McDonald Islands,Antarctic,unknown,3,3,3,3,False,heard island and mcdonald islands,,
+SZ,Eswatini,Africa,Southern Africa,1235549,Mbabane,"English, Swazi","Swazi lilangeni, South African rand",Eswatini,Africa,medium,3,3,2,3,False,eswatini,eswatini,12.665
+KM,Comoros,Africa,Eastern Africa,919901,Moroni,"Arabic, French, Comorian",Comorian franc,Comoros,Africa,medium,3,3,2,3,False,comoros,,
+IN,India,Asia,Southern Asia,1417492000,New Delhi,"English, Hindi, Tamil",Indian rupee,India,Asia,medium,3,3,2,3,True,india,,
+CC,Cocos (Keeling) Islands,Oceania,Australia and New Zealand,593,West Island,English,Australian dollar,Cocos (Keeling) Islands,Oceania,unknown,3,3,3,3,False,cocos islands,,
+GB,United Kingdom,Europe,Northern Europe,69281437,London,English,British pound,United Kingdom,Europe,medium,3,3,2,3,True,united kingdom,,
+AO,Angola,Africa,Middle Africa,36170961,Luanda,Portuguese,Angolan kwanza,Angola,Africa,medium,3,3,2,3,False,angola,angola,4.102
+MO,Macau,Asia,Eastern Asia,685900,N/A,"Portuguese, Chinese",Macanese pataca,Macau,Asia,high,4,4,3,3,False,macau,,
+CR,Costa Rica,Americas,Central America,5309625,San José,Spanish,Costa Rican colón,Costa Rica,Americas,medium,3,3,2,3,False,costa rica,,
+NU,Niue,Oceania,Polynesia,1681,Alofi,"English, Niuean",New Zealand dollar,Niue,Oceania,unknown,3,3,3,3,False,niue,,
+CK,Cook Islands,Oceania,Polynesia,15040,Avarua,"English, Cook Islands Māori","Cook Islands dollar, New Zealand dollar",Cook Islands,Oceania,unknown,3,3,3,3,False,cook islands,cook islands,3.49
+DJ,Djibouti,Africa,Eastern Africa,1066809,Djibouti,"Arabic, French",Djiboutian franc,Djibouti,Africa,medium,3,3,2,3,False,djibouti,,
+PM,Saint Pierre and Miquelon,Americas,North America,5819,Saint-Pierre,French,Euro,Saint Pierre and Miquelon,Americas,unknown,3,3,3,3,False,saint pierre and miquelon,saint pierre and miquelon,16.518
+AT,Austria,Europe,Central Europe,9200931,Vienna,German,Euro,Austria,Europe,low,2,2,2,2,True,austria,,
+ID,Indonesia,Asia,South-Eastern Asia,284438782,Jakarta,Indonesian,Indonesian rupiah,Indonesia,Asia,medium,3,3,2,3,True,indonesia,,
+NR,Nauru,Oceania,Micronesia,11680,Yaren,"English, Nauru",Australian dollar,Nauru,Oceania,low,2,2,2,2,False,nauru,,
+KZ,Kazakhstan,Asia,Central Asia,20426568,Astana,"Kazakh, Russian",Kazakhstani tenge,Kazakhstan,Asia,low,2,2,2,2,False,kazakhstan,,
+MW,Malawi,Africa,Eastern Africa,20734262,Lilongwe,"English, Chewa",Malawian kwacha,Malawi,Africa,medium,3,3,2,3,False,malawi,,
+ER,Eritrea,Africa,Eastern Africa,3607000,Asmara,"Arabic, English, Tigrinya",Eritrean nakfa,Eritrea,Africa,medium,3,3,2,3,False,eritrea,eritrea,14.573
+TN,Tunisia,Africa,Northern Africa,11972169,Tunis,Arabic,Tunisian dinar,Tunisia,Africa,medium,3,3,2,3,False,tunisia,tunisia,4.621
+PN,Pitcairn Islands,Oceania,Polynesia,35,Adamstown,English,New Zealand dollar,Pitcairn Islands,Oceania,unknown,3,3,3,3,False,pitcairn islands,,
+SA,Saudi Arabia,Asia,Western Asia,35300280,Riyadh,Arabic,Saudi riyal,Saudi Arabia,Asia,medium,3,3,2,3,True,saudi arabia,,
+TM,Turkmenistan,Asia,Central Asia,7057841,Ashgabat,"Russian, Turkmen",Turkmenistan manat,Turkmenistan,Asia,low,2,2,2,2,False,turkmenistan,turkmenistan,1.093
+EH,Western Sahara,Africa,Northern Africa,600904,El Aaiún,"Berber, Hassaniya, Spanish","Algerian dinar, Moroccan dirham",Western Sahara,Africa,unknown,3,3,3,3,False,western sahara,,
+GH,Ghana,Africa,Western Africa,33742380,Accra,English,Ghanaian cedi,Ghana,Africa,medium,3,3,2,3,False,ghana,,
+TV,Tuvalu,Oceania,Polynesia,10643,Funafuti,"English, Tuvaluan","Australian dollar, Tuvaluan dollar",Tuvalu,Oceania,low,2,2,2,2,False,tuvalu,,
+MM,Myanmar,Asia,South-Eastern Asia,51316756,Naypyidaw,Burmese,Burmese kyat,Myanmar,Asia,high,4,4,3,3,False,myanmar,,
+GA,Gabon,Africa,Middle Africa,2469296,Libreville,French,Central African CFA franc,Gabon,Africa,medium,3,3,2,3,False,gabon,,
+CU,Cuba,Americas,Caribbean,9748007,Havana,Spanish,"Cuban convertible peso, Cuban peso",Cuba,Americas,medium,3,3,2,3,False,cuba,,
+CN,China,Asia,Eastern Asia,1408280000,Beijing,Chinese,Chinese yuan,China,Asia,medium,3,3,2,3,True,china,,
+PA,Panama,Americas,Central America,4064780,Panama City,Spanish,"Panamanian balboa, United States dollar",Panama,Americas,medium,3,3,2,3,False,panama,,
+TH,Thailand,Asia,South-Eastern Asia,65859640,Bangkok,Thai,Thai baht,Thailand,Asia,medium,3,3,2,3,True,thailand,,
+RU,Russia,Europe,Eastern Europe,146028325,Moscow,Russian,Russian ruble,Russia,Europe,high,4,4,3,3,False,russia,,
+BA,Bosnia and Herzegovina,Europe,Southeast Europe,3422000,Sarajevo,"Bosnian, Croatian, Serbian",Bosnia and Herzegovina convertible mark,Bosnia and Herzegovina,Europe,medium,3,3,2,3,False,bosnia and herzegovina,bosnia and herzegovina,1.224
+QA,Qatar,Asia,Western Asia,3173024,Doha,Arabic,Qatari riyal,Qatar,Asia,low,2,2,2,2,False,qatar,,
+BV,Bouvet Island,Antarctic,,0,N/A,Norwegian,N/A,Bouvet Island,Antarctic,unknown,3,3,3,3,False,bouvet island,,
+IQ,Iraq,Asia,Western Asia,46118793,Baghdad,"Arabic, Aramaic, Sorani",Iraqi dinar,Iraq,Asia,high,4,4,3,3,False,iraq,iraq,9.41
+IQ,Iraq,Asia,Western Asia,46118793,Baghdad,"Arabic, Aramaic, Sorani",Iraqi dinar,Iraq,Asia,high,4,4,3,3,False,iraq,iraq,15.397
+IQ,Iraq,Asia,Western Asia,46118793,Baghdad,"Arabic, Aramaic, Sorani",Iraqi dinar,Iraq,Asia,high,4,4,3,3,False,iraq,iraq,2.246
+TJ,Tajikistan,Asia,Central Asia,10499000,Dushanbe,"Russian, Tajik",Tajikistani somoni,Tajikistan,Asia,medium,3,3,2,3,False,tajikistan,tajikistan,0.912
+GY,Guyana,Americas,South America,772975,Georgetown,English,Guyanese dollar,Guyana,Americas,high,4,4,3,3,False,guyana,,
+SB,Solomon Islands,Oceania,Melanesia,750325,Honiara,English,Solomon Islands dollar,Solomon Islands,Oceania,medium,3,3,2,3,False,solomon islands,solomon islands,3.682
+SK,Slovakia,Europe,Central Europe,5413813,Bratislava,Slovak,Euro,Slovakia,Europe,low,2,2,2,2,False,slovakia,,
+GI,Gibraltar,Europe,Southern Europe,38000,Gibraltar,English,Gibraltar pound,Gibraltar,Europe,unknown,3,3,3,3,False,gibraltar,,
+PE,Peru,Americas,South America,34350244,Lima,"Aymara, Quechua, Spanish",Peruvian sol,Peru,Americas,medium,3,3,2,3,True,peru,,
+PR,Puerto Rico,Americas,Caribbean,3203295,San Juan,"English, Spanish",United States dollar,Puerto Rico,Americas,unknown,3,3,3,3,False,puerto rico,,
+AM,Armenia,Asia,Western Asia,3076200,Yerevan,Armenian,Armenian dram,Armenia,Asia,medium,3,3,2,3,False,armenia,,
+AZ,Azerbaijan,Asia,Western Asia,10241722,Baku,Azerbaijani,Azerbaijani manat,Azerbaijan,Asia,medium,3,3,2,3,False,azerbaijan,,
+MR,Mauritania,Africa,Western Africa,4927532,Nouakchott,Arabic,Mauritanian ouguiya,Mauritania,Africa,high,4,4,3,3,False,mauritania,,
+BZ,Belize,Americas,Central America,417634,Belmopan,"Belizean Creole, English, Spanish",Belize dollar,Belize,Americas,medium,3,3,2,3,False,belize,,
+AI,Anguilla,Americas,Caribbean,16010,The Valley,English,Eastern Caribbean dollar,Anguilla,Americas,low,2,2,2,2,False,anguilla,anguilla,28.328
+SC,Seychelles,Africa,Eastern Africa,122729,Victoria,"Seychellois Creole, English, French",Seychellois rupee,Seychelles,Africa,low,2,2,2,2,False,seychelles,seychelles,9.335
+NF,Norfolk Island,Oceania,Australia and New Zealand,2188,Kingston,"English, Norfuk",Australian dollar,Norfolk Island,Oceania,unknown,3,3,3,3,False,norfolk island,,
+PH,Philippines,Asia,South-Eastern Asia,114123600,Manila,"English, Filipino",Philippine peso,Philippines,Asia,medium,3,3,2,3,True,philippines,,
+AR,Argentina,Americas,South America,46735004,Buenos Aires,"Guaraní, Spanish",Argentine peso,Argentina,Americas,low,2,2,2,2,True,argentina,,
+MD,Moldova,Europe,Eastern Europe,2749076,Chișinău,Romanian,Moldovan leu,Moldova,Europe,medium,3,3,2,3,False,moldova,,
+WS,Samoa,Oceania,Polynesia,205557,Apia,"English, Samoan",Samoan tālā,Samoa,Oceania,low,2,2,2,2,False,samoa,samoa,6.199
+AQ,Antarctica,Antarctic,,1300,N/A,N/A,N/A,Antarctica,Antarctic,medium,3,3,2,3,False,antarctica,,
+SL,Sierra Leone,Africa,Western Africa,9077691,Freetown,English,Leone,Sierra Leone,Africa,medium,3,3,2,3,False,sierra leone,sierra leone,2.137
+KH,Cambodia,Asia,South-Eastern Asia,17577760,Phnom Penh,Khmer,"Cambodian riel, United States dollar",Cambodia,Asia,medium,3,3,2,3,False,cambodia,,
+VU,Vanuatu,Oceania,Melanesia,321409,Port Vila,"Bislama, English, French",Vanuatu vatu,Vanuatu,Oceania,low,2,2,2,2,False,vanuatu,vanuatu,0.321
+JO,Jordan,Asia,Western Asia,11734000,Amman,Arabic,Jordanian dinar,Jordan,Asia,medium,3,3,2,3,False,jordan,,
+MQ,Martinique,Americas,Caribbean,349925,Fort-de-France,French,Euro,Martinique,Americas,unknown,3,3,3,3,False,martinique,martinique,2.79
+TO,Tonga,Oceania,Polynesia,100179,Nuku'alofa,"English, Tongan",Tongan paʻanga,Tonga,Oceania,low,2,2,2,2,False,tonga,,
+VG,British Virgin Islands,Americas,Caribbean,39471,Road Town,English,United States dollar,British Virgin Islands,Americas,low,2,2,2,2,False,british virgin islands,british virgin islands,8.223
+TL,Timor-Leste,Asia,South-Eastern Asia,1391221,Dili,"Portuguese, Tetum",United States dollar,Timor-Leste,Asia,medium,3,3,2,3,False,timor-leste,timor-leste,4.064
+PF,French Polynesia,Oceania,Polynesia,279500,Papeetē,French,CFP franc,French Polynesia,Oceania,low,2,2,2,2,False,french polynesia,french polynesia,0.354
+TR,Turkey,Asia,Western Asia,85664944,Ankara,Turkish,Turkish lira,Turkey,Asia,medium,3,3,2,3,True,turkey,,
+GG,Guernsey,Europe,Northern Europe,64781,St. Peter Port,"English, French, Guernésiais","British pound, Guernsey pound",Guernsey,Europe,unknown,3,3,3,3,False,guernsey,,
+SN,Senegal,Africa,Western Africa,18593258,Dakar,French,West African CFA franc,Senegal,Africa,low,2,2,2,2,False,senegal,,
+GT,Guatemala,Americas,Central America,18079810,Guatemala City,Spanish,Guatemalan quetzal,Guatemala,Americas,high,4,4,3,3,False,guatemala,,
+PL,Poland,Europe,Central Europe,37392000,Warsaw,Polish,Polish złoty,Poland,Europe,low,2,2,2,2,True,poland,,
+BS,Bahamas,Americas,Caribbean,398165,Nassau,English,"Bahamian dollar, United States dollar",Bahamas,Americas,medium,3,3,2,3,False,bahamas,bahamas,31.221
+FO,Faroe Islands,Europe,Northern Europe,54885,Tórshavn,"Danish, Faroese","Danish krone, Faroese króna",Faroe Islands,Europe,unknown,3,3,3,3,False,faroe islands,,
+AW,Aruba,Americas,Caribbean,107566,Oranjestad,"Dutch, Papiamento",Aruban florin,Aruba,Americas,low,2,2,2,2,False,aruba,aruba,1.931
+DO,Dominican Republic,Americas,Caribbean,10771504,Santo Domingo,Spanish,Dominican peso,Dominican Republic,Americas,medium,3,3,2,3,False,dominican republic,,
+HK,Hong Kong,Asia,Eastern Asia,7527500,City of Victoria,"English, Chinese",Hong Kong dollar,Hong Kong,Asia,medium,3,3,2,3,False,hong kong,,
+ST,São Tomé and Príncipe,Africa,Middle Africa,209607,São Tomé,Portuguese,São Tomé and Príncipe dobra,São Tomé and Príncipe,Africa,medium,3,3,2,3,False,são tomé and príncipe,são tomé and príncipe,3.225
+UY,Uruguay,Americas,South America,3499451,Montevideo,Spanish,Uruguayan peso,Uruguay,Americas,medium,3,3,2,3,False,uruguay,uruguay,11.19
+BM,Bermuda,Americas,North America,64055,Hamilton,English,Bermudian dollar,Bermuda,Americas,low,2,2,2,2,False,bermuda,bermuda,6.183
+WF,Wallis and Futuna,Oceania,Polynesia,11620,Mata-Utu,French,CFP franc,Wallis and Futuna,Oceania,unknown,3,3,3,3,False,wallis and futuna,,
+ZA,South Africa,Africa,Southern Africa,63100945,Pretoria,"Afrikaans, English, Southern Ndebele",South African rand,South Africa,Africa,medium,3,3,2,3,True,south africa,,
+IL,Israel,Asia,Western Asia,10134800,Jerusalem,"Arabic, Hebrew",Israeli new shekel,Israel,Asia,unknown,3,3,3,3,True,israel,,
+SM,San Marino,Europe,Southern Europe,34132,City of San Marino,Italian,Euro,San Marino,Europe,unknown,3,3,3,3,False,san marino,san marino,0.0
+SV,El Salvador,Americas,Central America,6029976,San Salvador,Spanish,United States dollar,El Salvador,Americas,low,2,2,2,2,False,el salvador,,
+MN,Mongolia,Asia,Eastern Asia,3544835,Ulan Bator,Mongolian,Mongolian tögrög,Mongolia,Asia,low,2,2,2,2,False,mongolia,mongolia,5.915
+AS,American Samoa,Oceania,Polynesia,49710,Pago Pago,"English, Samoan",United States dollar,American Samoa,Oceania,unknown,3,3,3,3,False,american samoa,american samoa,0.0
+TF,French Southern and Antarctic Lands,Antarctic,,400,Port-aux-Français,French,Euro,French Southern and Antarctic Lands,Antarctic,unknown,3,3,3,3,False,french southern and antarctic lands,,
+ZW,Zimbabwe,Africa,Southern Africa,17073087,Harare,"Chibarwe, English, Kalanga",Zimbabwean dollar,Zimbabwe,Africa,medium,3,3,2,3,False,zimbabwe,,
+FK,Falkland Islands,Americas,South America,3662,Stanley,English,Falkland Islands pound,Falkland Islands,Americas,unknown,3,3,3,3,False,falkland islands,,
+HR,Croatia,Europe,Southeast Europe,3866233,Zagreb,Croatian,Euro,Croatia,Europe,low,2,2,2,2,True,croatia,croatia,0.769
+KI,Kiribati,Oceania,Micronesia,120740,South Tarawa,"English, Gilbertese","Australian dollar, Kiribati dollar",Kiribati,Oceania,low,2,2,2,2,False,kiribati,kiribati,7.167
+MH,Marshall Islands,Oceania,Micronesia,42418,Majuro,"English, Marshallese",United States dollar,Marshall Islands,Oceania,low,2,2,2,2,False,marshall islands,marshall islands,4.013
+NO,Norway,Europe,Northern Europe,5606944,Oslo,"Norwegian Nynorsk, Norwegian Bokmål, Sami",Norwegian krone,Norway,Europe,low,2,2,2,2,True,norway,,
+ML,Mali,Africa,Western Africa,22395489,Bamako,French,West African CFA franc,Mali,Africa,high,4,4,3,3,False,mali,,
+ZM,Zambia,Africa,Eastern Africa,19693423,Lusaka,English,Zambian kwacha,Zambia,Africa,low,2,2,2,2,False,zambia,,
+MV,Maldives,Asia,Southern Asia,515132,Malé,Maldivian,Maldivian rufiyaa,Maldives,Asia,medium,3,3,2,3,False,maldives,,
+AG,Antigua and Barbuda,Americas,Caribbean,103603,Saint John's,English,Eastern Caribbean dollar,Antigua and Barbuda,Americas,low,2,2,2,2,False,antigua and barbuda,,
+CX,Christmas Island,Oceania,Australia and New Zealand,1692,Flying Fish Cove,English,Australian dollar,Christmas Island,Oceania,unknown,3,3,3,3,False,christmas island,,
+IR,Iran,Asia,Southern Asia,85961000,Tehran,Persian (Farsi),Iranian rial,Iran,Asia,high,4,4,3,3,False,iran,,
+IT,Italy,Europe,Southern Europe,58927633,Rome,"Italian, Catalan",Euro,Italy,Europe,medium,3,3,2,3,True,italy,,
+GM,Gambia,Africa,Western Africa,2422712,Banjul,English,dalasi,Gambia,Africa,medium,3,3,2,3,False,gambia,,
+KR,South Korea,Asia,Eastern Asia,51159889,Seoul,Korean,South Korean won,South Korea,Asia,low,2,2,2,2,True,south korea,,
+PG,Papua New Guinea,Oceania,Melanesia,11781559,Port Moresby,"English, Hiri Motu, Tok Pisin",Papua New Guinean kina,Papua New Guinea,Oceania,high,4,4,3,3,False,papua new guinea,,
+EG,Egypt,Africa,Northern Africa,107271260,Cairo,Arabic,Egyptian pound,Egypt,Africa,medium,3,3,2,3,True,egypt,,
+IM,Isle of Man,Europe,Northern Europe,84530,Douglas,"English, Manx","British pound, Manx pound",Isle of Man,Europe,unknown,3,3,3,3,False,isle of man,isle of man,0.0
+LV,Latvia,Europe,Northern Europe,1829000,Riga,Latvian,Euro,Latvia,Europe,low,2,2,2,2,False,latvia,,
+PY,Paraguay,Americas,South America,6109644,Asunción,"Guaraní, Spanish",Paraguayan guaraní,Paraguay,Americas,low,2,2,2,2,False,paraguay,,
+GD,Grenada,Americas,Caribbean,109021,St. George's,English,Eastern Caribbean dollar,Grenada,Americas,low,2,2,2,2,False,grenada,grenada,6.378
+CO,Colombia,Americas,South America,53057212,Bogotá,Spanish,Colombian peso,Colombia,Americas,high,4,4,3,3,True,colombia,,
+FI,Finland,Europe,Northern Europe,5650325,Helsinki,"Finnish, Swedish",Euro,Finland,Europe,low,2,2,2,2,True,finland,,
+BG,Bulgaria,Europe,Southeast Europe,6437360,Sofia,Bulgarian,Bulgarian lev,Bulgaria,Europe,low,2,2,2,2,False,bulgaria,,
+TG,Togo,Africa,Western Africa,8095498,Lomé,French,West African CFA franc,Togo,Africa,medium,3,3,2,3,False,togo,,
+CL,Chile,Americas,South America,20206953,Santiago,Spanish,Chilean peso,Chile,Americas,medium,3,3,2,3,True,chile,,
+DM,Dominica,Americas,Caribbean,67408,Roseau,English,Eastern Caribbean dollar,Dominica,Americas,low,2,2,2,2,False,dominica,dominica,26.121
+IE,Ireland,Europe,Northern Europe,5458600,Dublin,"English, Irish",Euro,Ireland,Europe,low,2,2,2,2,True,ireland,ireland,0.654
+BW,Botswana,Africa,Southern Africa,2359609,Gaborone,"English, Tswana",Botswana pula,Botswana,Africa,medium,3,3,2,3,False,botswana,botswana,10.547
+XK,Kosovo,Europe,Southeast Europe,1585566,Pristina,"Albanian, Serbian",Euro,Kosovo,Europe,medium,3,3,2,3,False,kosovo,,
+US,United States,Americas,North America,340110988,"Washington, D.C.",English,United States dollar,United States,Americas,unknown,3,3,3,3,True,united states,,
+UZ,Uzbekistan,Asia,Central Asia,37859698,Tashkent,"Russian, Uzbek",Uzbekistani soʻm,Uzbekistan,Asia,low,2,2,2,2,False,uzbekistan,uzbekistan,1.405
+BR,Brazil,Americas,South America,213421037,Brasília,Portuguese,Brazilian real,Brazil,Americas,medium,3,3,2,3,True,brazil,,
+RW,Rwanda,Africa,Eastern Africa,14104969,Kigali,"English, French, Kinyarwanda",Rwandan franc,Rwanda,Africa,medium,3,3,2,3,False,rwanda,rwanda,3.59
+LI,Liechtenstein,Europe,Western Europe,40900,Vaduz,German,Swiss franc,Liechtenstein,Europe,low,2,2,2,2,False,liechtenstein,liechtenstein,5.123
+BT,Bhutan,Asia,Southern Asia,784043,Thimphu,Dzongkha,"Bhutanese ngultrum, Indian rupee",Bhutan,Asia,low,2,2,2,2,False,bhutan,,
+ME,Montenegro,Europe,Southeast Europe,623327,Podgorica,Montenegrin,Euro,Montenegro,Europe,low,2,2,2,2,False,montenegro,,
+NE,Niger,Africa,Western Africa,26312034,Niamey,French,West African CFA franc,Niger,Africa,high,4,4,3,3,False,niger,niger,4.389
+AL,Albania,Europe,Southeast Europe,2363314,Tirana,Albanian,Albanian lek,Albania,Europe,medium,3,3,2,3,False,albania,,
+MA,Morocco,Africa,Northern Africa,36828330,Rabat,"Arabic, Berber",Moroccan dirham,Morocco,Africa,medium,3,3,2,3,True,morocco,morocco,1.705
+VE,Venezuela,Americas,South America,28517000,Caracas,Spanish,Venezuelan bolívar soberano,Venezuela,Americas,high,4,4,3,3,False,venezuela,,
+CG,Republic of the Congo,Africa,Middle Africa,6142180,Brazzaville,"French, Kikongo, Lingala",Central African CFA franc,Republic of the Congo,Africa,medium,3,3,2,3,False,republic of the congo,,
+BI,Burundi,Africa,Eastern Africa,12332788,Gitega,"French, Kirundi",Burundian franc,Burundi,Africa,high,4,4,3,3,False,burundi,burundi,5.824
+JE,Jersey,Europe,Northern Europe,103267,Saint Helier,"English, French, Jèrriais","British pound, Jersey pound",Jersey,Europe,unknown,3,3,3,3,False,jersey,,
+MK,North Macedonia,Europe,Southeast Europe,1822612,Skopje,Macedonian,denar,North Macedonia,Europe,low,2,2,2,2,False,north macedonia,north macedonia,1.529
+KG,Kyrgyzstan,Asia,Central Asia,7281800,Bishkek,"Kyrgyz, Russian",Kyrgyzstani som,Kyrgyzstan,Asia,low,2,2,2,2,False,kyrgyzstan,,
+RO,Romania,Europe,Southeast Europe,19036031,Bucharest,Romanian,Romanian leu,Romania,Europe,low,2,2,2,2,False,romania,,
+GU,Guam,Oceania,Micronesia,153836,Hagåtña,"Chamorro, English, Spanish",United States dollar,Guam,Oceania,unknown,3,3,3,3,False,guam,guam,4.151
+AX,Åland Islands,Europe,Northern Europe,30654,Mariehamn,Swedish,Euro,Åland Islands,Europe,unknown,3,3,3,3,False,åland islands,,
+GQ,Equatorial Guinea,Africa,Middle Africa,1668768,Malabo,"French, Portuguese, Spanish",Central African CFA franc,Equatorial Guinea,Africa,medium,3,3,2,3,False,equatorial guinea,,
+GS,South Georgia,Antarctic,,0,King Edward Point,English,British pound,South Georgia,Antarctic,unknown,3,3,3,3,False,south georgia,,
+GF,French Guiana,Americas,South America,292354,Cayenne,French,Euro,French Guiana,Americas,low,2,2,2,2,False,french guiana,french guiana,13.3
+DE,Germany,Europe,Western Europe,83491249,Berlin,German,Euro,Germany,Europe,medium,3,3,2,3,True,germany,,
+DK,Denmark,Europe,Northern Europe,6011488,Copenhagen,Danish,Danish krone,Denmark,Europe,medium,3,3,2,3,True,denmark,,
+IS,Iceland,Europe,Northern Europe,391810,Reykjavik,Icelandic,Icelandic króna,Iceland,Europe,low,2,2,2,2,False,iceland,,
+SO,Somalia,Africa,Eastern Africa,19655000,Mogadishu,"Arabic, Somali",Somali shilling,Somalia,Africa,high,4,4,3,3,False,somalia,,
+FM,Micronesia,Oceania,Micronesia,105564,Palikir,English,United States dollar,Micronesia,Oceania,low,2,2,2,2,False,micronesia,micronesia,0.898
+LA,Laos,Asia,South-Eastern Asia,7647000,Vientiane,Lao,Lao kip,Laos,Asia,medium,3,3,2,3,False,laos,,
+SX,Sint Maarten,Americas,Caribbean,41349,Philipsburg,"English, French, Dutch",Netherlands Antillean guilder,Sint Maarten,Americas,low,2,2,2,2,False,sint maarten,,
+LR,Liberia,Africa,Western Africa,5248621,Monrovia,English,Liberian dollar,Liberia,Africa,medium,3,3,2,3,False,liberia,,
+TD,Chad,Africa,Middle Africa,19340757,N'Djamena,"Arabic, French",Central African CFA franc,Chad,Africa,high,4,4,3,3,False,chad,,
+AU,Australia,Oceania,Australia and New Zealand,27536874,Canberra,English,Australian dollar,Australia,Oceania,low,2,2,2,2,True,australia,,
+BF,Burkina Faso,Africa,Western Africa,24070553,Ouagadougou,French,West African CFA franc,Burkina Faso,Africa,high,4,4,3,3,False,burkina faso,,
+MT,Malta,Europe,Southern Europe,574250,Valletta,"English, Maltese",Euro,Malta,Europe,low,2,2,2,2,False,malta,,
+MP,Northern Mariana Islands,Oceania,Micronesia,47329,Saipan,"Carolinian, Chamorro, English",United States dollar,Northern Mariana Islands,Oceania,unknown,3,3,3,3,False,northern mariana islands,,
+UG,Uganda,Africa,Eastern Africa,45905417,Kampala,"English, Swahili",Ugandan shilling,Uganda,Africa,high,4,4,3,3,False,uganda,uganda,8.768
+ES,Spain,Europe,Southern Europe,49315949,Madrid,"Spanish, Catalan, Basque",Euro,Spain,Europe,medium,3,3,2,3,True,spain,,
+SD,Sudan,Africa,Northern Africa,51662000,Khartoum,"Arabic, English",Sudanese pound,Sudan,Africa,high,4,4,3,3,False,sudan,,
+TW,Taiwan,Asia,Eastern Asia,23317031,Taipei,Chinese,New Taiwan dollar,Taiwan,Asia,low,2,2,2,2,False,taiwan,,
+AF,Afghanistan,Asia,Southern Asia,43844000,Kabul,"Dari, Pashto, Turkmen",Afghan afghani,Afghanistan,Asia,high,4,4,3,3,False,afghanistan,,
+SJ,Svalbard and Jan Mayen,Europe,Northern Europe,2530,Longyearbyen,Norwegian,krone,Svalbard and Jan Mayen,Europe,unknown,3,3,3,3,False,svalbard and jan mayen,,
+FJ,Fiji,Oceania,Melanesia,900869,Suva,"English, Fijian, Fiji Hindi",Fijian dollar,Fiji,Oceania,low,2,2,2,2,False,fiji,fiji,2.173
+GW,Guinea-Bissau,Africa,Western Africa,1781308,Bissau,"Portuguese, Upper Guinea Creole",West African CFA franc,Guinea-Bissau,Africa,high,4,4,3,3,False,guinea-bissau,guinea-bissau,1.117
+AD,Andorra,Europe,Southern Europe,88406,Andorra la Vella,Catalan,Euro,Andorra,Europe,low,2,2,2,2,False,andorra,andorra,2.574
+DZ,Algeria,Africa,Northern Africa,47400000,Algiers,Arabic,Algerian dinar,Algeria,Africa,medium,3,3,2,3,False,algeria,algeria,1.161
+PT,Portugal,Europe,Southern Europe,10749635,Lisbon,Portuguese,Euro,Portugal,Europe,low,2,2,2,2,True,portugal,,
+MZ,Mozambique,Africa,Eastern Africa,34090466,Maputo,Portuguese,Mozambican metical,Mozambique,Africa,medium,3,3,2,3,False,mozambique,mozambique,3.573
+LS,Lesotho,Africa,Southern Africa,2116427,Maseru,"English, Sotho","Lesotho loti, South African rand",Lesotho,Africa,medium,3,3,2,3,False,lesotho,,
+KP,North Korea,Asia,Eastern Asia,25950000,Pyongyang,Korean,North Korean won,North Korea,Asia,high,4,4,3,3,False,north korea,,
+SG,Singapore,Asia,South-Eastern Asia,6110200,Singapore,"English, Chinese, Malay",Singapore dollar,Singapore,Asia,low,2,2,2,2,True,singapore,,
+MC,Monaco,Europe,Western Europe,38423,Monaco,French,Euro,Monaco,Europe,unknown,3,3,3,3,False,monaco,monaco,0.0
+LB,Lebanon,Asia,Western Asia,5490000,Beirut,"Arabic, French",Lebanese pound,Lebanon,Asia,high,4,4,3,3,False,lebanon,lebanon,2.26
+RS,Serbia,Europe,Southeast Europe,6567783,Belgrade,Serbian,Serbian dinar,Serbia,Europe,medium,3,3,2,3,False,serbia,,
+EE,Estonia,Europe,Northern Europe,1369995,Tallinn,Estonian,Euro,Estonia,Europe,low,2,2,2,2,False,estonia,,
+BB,Barbados,Americas,Caribbean,267800,Bridgetown,English,Barbadian dollar,Barbados,Americas,low,2,2,2,2,False,barbados,barbados,15.268
+MU,Mauritius,Africa,Eastern Africa,1243741,Port Louis,"English, French, Mauritian Creole",Mauritian rupee,Mauritius,Africa,low,2,2,2,2,False,mauritius,,
+SH,"Saint Helena, Ascension and Tristan da Cunha",Africa,Western Africa,5651,Jamestown,English,"Pound sterling, Saint Helena pound","Saint Helena, Ascension and Tristan da Cunha",Africa,unknown,3,3,3,3,False,"saint helena, ascension and tristan da cunha",,
+BE,Belgium,Europe,Western Europe,11825551,Brussels,"German, French, Dutch",Euro,Belgium,Europe,medium,3,3,2,3,True,belgium,,
+LY,Libya,Africa,Northern Africa,7459000,Tripoli,Arabic,Libyan dinar,Libya,Africa,high,4,4,3,3,False,libya,,
+NI,Nicaragua,Americas,Central America,6803886,Managua,Spanish,Nicaraguan córdoba,Nicaragua,Americas,high,4,4,3,3,False,nicaragua,nicaragua,11.006
+KW,Kuwait,Asia,Western Asia,4881254,Kuwait City,Arabic,Kuwaiti dinar,Kuwait,Asia,low,2,2,2,2,False,kuwait,,
+NC,New Caledonia,Oceania,Melanesia,264596,Nouméa,French,CFP franc,New Caledonia,Oceania,high,4,4,3,3,False,new caledonia,new caledonia,3.113
+FR,France,Europe,Western Europe,66351959,Paris,French,Euro,France,Europe,medium,3,3,2,3,True,france,,
+VN,Vietnam,Asia,South-Eastern Asia,101343800,Hanoi,Vietnamese,Vietnamese đồng,Vietnam,Asia,low,2,2,2,2,True,vietnam,,
+VC,Saint Vincent and the Grenadines,Americas,Caribbean,110872,Kingstown,English,Eastern Caribbean dollar,Saint Vincent and the Grenadines,Americas,low,2,2,2,2,False,saint vincent and the grenadines,saint vincent and the grenadines,40.405
+BH,Bahrain,Asia,Western Asia,1594654,Manama,Arabic,Bahraini dinar,Bahrain,Asia,medium,3,3,2,3,False,bahrain,,
+CW,Curaçao,Americas,Caribbean,156115,Willemstad,"English, Dutch, Papiamento",Netherlands Antillean guilder,Curaçao,Americas,low,2,2,2,2,False,curaçao,curaçao,17.092
+BD,Bangladesh,Asia,Southern Asia,169828911,Dhaka,Bengali,Bangladeshi taka,Bangladesh,Asia,high,4,4,3,3,False,bangladesh,,
+CI,Ivory Coast,Africa,Western Africa,31719275,Yamoussoukro,French,West African CFA franc,Ivory Coast,Africa,medium,3,3,2,3,False,ivory coast,,
+CD,DR Congo,Africa,Middle Africa,112832000,Kinshasa,"French, Kikongo, Lingala",Congolese franc,DR Congo,Africa,unknown,3,3,3,3,False,dr congo,,
+LK,Sri Lanka,Asia,Southern Asia,21763170,Sri Jayawardenepura Kotte,"Sinhala, Tamil",Sri Lankan rupee,Sri Lanka,Asia,medium,3,3,2,3,False,sri lanka,,
+UM,United States Minor Outlying Islands,Americas,North America,0,Washington DC,English,United States dollar,United States Minor Outlying Islands,Americas,unknown,3,3,3,3,False,united states minor outlying islands,,
+BQ,Caribbean Netherlands,Americas,Caribbean,31980,Kralendijk,"English, Dutch, Papiamento",United States dollar,Caribbean Netherlands,Americas,unknown,3,3,3,3,False,caribbean netherlands,,
+NP,Nepal,Asia,Southern Asia,29911840,Kathmandu,Nepali,Nepalese rupee,Nepal,Asia,high,4,4,3,3,False,nepal,,
+BO,Bolivia,Americas,South America,11365333,Sucre,"Aymara, Guaraní, Quechua",Bolivian boliviano,Bolivia,Americas,medium,3,3,2,3,False,bolivia,,
+NA,Namibia,Africa,Southern Africa,3022401,Windhoek,"Afrikaans, German, English","Namibian dollar, South African rand",Namibia,Africa,medium,3,3,2,3,False,namibia,,
+HT,Haiti,Americas,Caribbean,11867032,Port-au-Prince,"French, Haitian Creole",Haitian gourde,Haiti,Americas,high,4,4,3,3,False,haiti,,
+SR,Suriname,Americas,South America,616500,Paramaribo,Dutch,Surinamese dollar,Suriname,Americas,low,2,2,2,2,False,suriname,,
+MF,Saint Martin,Americas,Caribbean,31496,Marigot,French,Euro,Saint Martin,Americas,unknown,3,3,3,3,False,saint martin,saint martin,28.727
+CA,Canada,Americas,North America,41651653,Ottawa,"English, French",Canadian dollar,Canada,Americas,low,2,2,2,2,True,canada,,
+HN,Honduras,Americas,Central America,9892632,Tegucigalpa,Spanish,Honduran lempira,Honduras,Americas,high,4,4,3,3,False,honduras,,
+VA,Vatican City,Europe,Southern Europe,882,Vatican City,"Italian, Latin",Euro,Vatican City,Europe,unknown,3,3,3,3,False,vatican city,,
+AE,United Arab Emirates,Asia,Western Asia,11294243,Abu Dhabi,Arabic,United Arab Emirates dirham,United Arab Emirates,Asia,medium,3,3,2,3,True,united arab emirates,,
+GN,Guinea,Africa,Western Africa,14363931,Conakry,French,Guinean franc,Guinea,Africa,medium,3,3,2,3,False,guinea,,
+CM,Cameroon,Africa,Middle Africa,29442327,Yaoundé,"English, French",Central African CFA franc,Cameroon,Africa,medium,3,3,2,3,False,cameroon,cameroon,4.537
+CY,Cyprus,Europe,Southern Europe,1442614,Nicosia,"Greek, Turkish",Euro,Cyprus,Europe,low,2,2,2,2,False,cyprus,,
+TT,Trinidad and Tobago,Americas,Caribbean,1367764,Port of Spain,English,Trinidad and Tobago dollar,Trinidad and Tobago,Americas,high,4,4,3,3,False,trinidad and tobago,,
+SE,Sweden,Europe,Northern Europe,10605098,Stockholm,Swedish,Swedish krona,Sweden,Europe,medium,3,3,2,3,True,sweden,,
+MG,Madagascar,Africa,Eastern Africa,31727042,Antananarivo,"French, Malagasy",Malagasy ariary,Madagascar,Africa,high,4,4,3,3,False,madagascar,,
+YT,Mayotte,Africa,Eastern Africa,320901,Mamoudzou,French,Euro,Mayotte,Africa,unknown,3,3,3,3,False,mayotte,mayotte,5.816
+KY,Cayman Islands,Americas,Caribbean,84738,George Town,English,Cayman Islands dollar,Cayman Islands,Americas,low,2,2,2,2,False,cayman islands,cayman islands,4.457
+MY,Malaysia,Asia,South-Eastern Asia,34231700,Kuala Lumpur,"English, Malay",Malaysian ringgit,Malaysia,Asia,low,2,2,2,2,True,malaysia,,
+BJ,Benin,Africa,Western Africa,13224860,Porto-Novo,French,West African CFA franc,Benin,Africa,medium,3,3,2,3,False,benin,,
+GL,Greenland,Americas,North America,56542,Nuuk,Greenlandic,krone,Greenland,Americas,medium,3,3,2,3,False,greenland,,
+CH,Switzerland,Europe,Western Europe,9082848,Bern,"French, Swiss German, Italian",Swiss franc,Switzerland,Europe,low,2,2,2,2,True,switzerland,,
+GE,Georgia,Asia,Western Asia,4000921,Tbilisi,Georgian,lari,Georgia,Asia,low,2,2,2,2,False,georgia,,
+EC,Ecuador,Americas,South America,18103660,Quito,Spanish,United States dollar,Ecuador,Americas,medium,3,3,2,3,False,ecuador,,
+CV,Cape Verde,Africa,Western Africa,491233,Praia,Portuguese,Cape Verdean escudo,Cape Verde,Africa,low,2,2,2,2,False,cape verde,,
+LU,Luxembourg,Europe,Western Europe,681973,Luxembourg,"German, French, Luxembourgish",Euro,Luxembourg,Europe,low,2,2,2,2,False,luxembourg,luxembourg,1.544
+LC,Saint Lucia,Americas,Caribbean,184100,Castries,English,Eastern Caribbean dollar,Saint Lucia,Americas,low,2,2,2,2,False,saint lucia,,
+VI,United States Virgin Islands,Americas,Caribbean,87146,Charlotte Amalie,English,United States dollar,United States Virgin Islands,Americas,unknown,3,3,3,3,False,united states virgin islands,,
+JP,Japan,Asia,Eastern Asia,123210000,Tokyo,Japanese,Japanese yen,Japan,Asia,low,2,2,2,2,True,japan,,
+JM,Jamaica,Americas,Caribbean,2825544,Kingston,"English, Jamaican Patois",Jamaican dollar,Jamaica,Americas,high,4,4,3,3,False,jamaica,,
+ET,Ethiopia,Africa,Eastern Africa,111652998,Addis Ababa,Amharic,Ethiopian birr,Ethiopia,Africa,high,4,4,3,3,False,ethiopia,,
+PK,Pakistan,Asia,Southern Asia,241499431,Islamabad,"English, Urdu",Pakistani rupee,Pakistan,Asia,high,4,4,3,3,False,pakistan,,
+MS,Montserrat,Americas,Caribbean,4386,Plymouth,English,Eastern Caribbean dollar,Montserrat,Americas,low,2,2,2,2,False,montserrat,montserrat,0.0
+LT,Lithuania,Europe,Northern Europe,2894886,Vilnius,Lithuanian,Euro,Lithuania,Europe,low,2,2,2,2,False,lithuania,lithuania,2.628
+GR,Greece,Europe,Southern Europe,10400720,Athens,Greek,Euro,Greece,Europe,low,2,2,2,2,True,greece,,
