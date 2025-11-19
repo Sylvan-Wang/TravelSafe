@@ -38,7 +38,7 @@
             </h1>
             <p class="tn-hero-subtitle">
               Search a country once, then switch between a calm info view and a
-              crisis-ready playbook. <br>This prototype is designed for both
+              crisis-ready playbook. <br />This prototype is designed for both
               academic evaluation and real travel use.
             </p>
           </div>
@@ -66,17 +66,23 @@
             </div>
             <p class="tn-search-guidance">
               We’ll fetch a live country profile (population, region, language)
-              and combine it with a simple risk overview. <br>Then you can switch to
-              <strong>Crisis Mode</strong> for step-by-step guidance if
-              something goes wrong. <br>For the demo, try:
-              <span class="tn-chip tn-chip-soft tn-demo-country"
-                data-country="France">France</span
+              and combine it with a simple risk overview. <br />Then you can
+              switch to <strong>Crisis Mode</strong> for step-by-step guidance
+              if something goes wrong. <br />For the demo, try:
+              <span
+                class="tn-chip tn-chip-soft tn-demo-country"
+                data-country="France"
+                >France</span
               >
-              <span class="tn-chip tn-chip-soft tn-demo-country"
-                data-country="Japan">Japan</span
+              <span
+                class="tn-chip tn-chip-soft tn-demo-country"
+                data-country="Japan"
+                >Japan</span
               >
-              <span class="tn-chip tn-chip-soft tn-demo-country"
-                data-country="Italy">Italy</span
+              <span
+                class="tn-chip tn-chip-soft tn-demo-country"
+                data-country="Italy"
+                >Italy</span
               >.
             </p>
             <p
@@ -138,72 +144,80 @@
                   <p class="tn-section-text" id="country-profile-region"></p>
                 </section>
 
-                <section class="tn-section-block tn-country-meta" id="info-country-meta">
+                <section
+                  class="tn-section-block tn-country-meta"
+                  id="info-country-meta"
+                >
                   <ul class="tn-country-meta-list">
                     <li class="tn-country-meta-item">
                       <span class="tn-meta-label">Capital</span>
-                      <span class="tn-meta-value" id="country-capital">N/A</span>
+                      <span class="tn-meta-value" id="country-capital"
+                        >N/A</span
+                      >
                     </li>
                     <li class="tn-country-meta-item">
                       <span class="tn-meta-label">Population</span>
-                      <span class="tn-meta-value" id="country-population">N/A</span>
+                      <span class="tn-meta-value" id="country-population"
+                        >N/A</span
+                      >
                     </li>
                     <li class="tn-country-meta-item">
                       <span class="tn-meta-label">Languages</span>
-                      <span class="tn-meta-value" id="country-languages">N/A</span>
+                      <span class="tn-meta-value" id="country-languages"
+                        >N/A</span
+                      >
                     </li>
                     <li class="tn-country-meta-item">
                       <span class="tn-meta-label">Currencies</span>
-                      <span class="tn-meta-value" id="country-currency">N/A</span>
+                      <span class="tn-meta-value" id="country-currency"
+                        >N/A</span
+                      >
                     </li>
                   </ul>
                 </section>
               </article>
 
               <!-- Right: Risk overview & simple viz -->
-            <!-- Right: Risk overview & simple viz -->
-            <article class="tn-card tn-card-right">
-              <header class="tn-card-header tn-card-header-row">
-                <div>
-                  <h3 class="tn-card-title">Safety snapshot</h3>
-                  <p class="tn-card-subtitle" id="safety-header">
-                    A light-weight view of risk levels for solo travel:
-                    crime, politics, health, and natural conditions.
-                  </p>
-                </div>
-                <span
-                  id="info-risk-chip"
-                  class="tn-badge tn-badge-neutral"
+              <!-- Right: Risk overview & simple viz -->
+              <article class="tn-card tn-card-right">
+                <header class="tn-card-header tn-card-header-row">
+                  <div>
+                    <h3 class="tn-card-title">Safety snapshot</h3>
+                    <p class="tn-card-subtitle" id="safety-header">
+                      A light-weight view of risk levels for solo travel: crime,
+                      politics, health, and natural conditions.
+                    </p>
+                  </div>
+                  <span id="info-risk-chip" class="tn-badge tn-badge-neutral">
+                    No country selected
+                  </span>
+                </header>
+
+                <!-- Risk bars / scores -->
+                <section
+                  class="tn-section-block tn-risk-section"
+                  id="info-risk-bars"
                 >
-                  No country selected
-                </span>
-              </header>
+                  <p class="tn-placeholder">
+                    Once a country is selected, you'll see a simple visual
+                    breakdown of four dimensions: crime, political stability,
+                    health infrastructure, and natural hazard exposure.
+                  </p>
+                </section>
 
-              <!-- Risk bars / scores -->
-              <section
-                class="tn-section-block tn-risk-section"
-                id="info-risk-bars"
-              >
-                <p class="tn-placeholder">
-                  Once a country is selected, you'll see a simple visual
-                  breakdown of four dimensions: crime, political stability,
-                  health infrastructure, and natural hazard exposure.
-                </p>
-              </section>
-
-              <!-- Optional notes / advisory source -->
-              <section
-                class="tn-section-block tn-advisory-section"
-                id="info-advisory"
-              >
-                <h4 class="tn-section-title">Advisory source</h4>
-                <p class="tn-section-text" id="safety-advisory">
-                  When possible, we map to an official travel advisory level
-                  (e.g. Level 1–4). If live data is unavailable, we fall back
-                  to curated demo values for a few sample countries.
-                </p>
-              </section>
-            </article>
+                <!-- Optional notes / advisory source -->
+                <section
+                  class="tn-section-block tn-advisory-section"
+                  id="info-advisory"
+                >
+                  <h4 class="tn-section-title">Advisory source</h4>
+                  <p class="tn-section-text" id="safety-advisory">
+                    When possible, we map to an official travel advisory level
+                    (e.g. Level 1–4). If live data is unavailable, we fall back
+                    to curated demo values for a few sample countries.
+                  </p>
+                </section>
+              </article>
             </div>
           </section>
 
@@ -269,22 +283,18 @@
                   id="crisis-playbook"
                 >
                   <p class="tn-placeholder">
-                    Once a country is selected, we’ll surface 2–3 core
-                    scenarios with very concrete steps. This content is driven
-                    by your offline JSON and does not depend on network
-                    quality.
+                    Once a country is selected, we’ll surface 2–3 core scenarios
+                    with very concrete steps. This content is driven by your
+                    offline JSON and does not depend on network quality.
                   </p>
                 </section>
 
                 <!-- User question + mock AI answer -->
-                <section
-                  class="tn-section-block tn-crisis-qna"
-                  id="crisis-qna"
-                >
+                <section class="tn-section-block tn-crisis-qna" id="crisis-qna">
                   <h4 class="tn-section-title">Ask a quick question</h4>
                   <p class="tn-section-text">
-                    Example: “Public transport is on strike and I’m alone in
-                    the city center, what should I do first?”
+                    Example: “Public transport is on strike and I’m alone in the
+                    city center, what should I do first?”
                   </p>
 
                   <form
@@ -317,16 +327,59 @@
                     aria-live="polite"
                   >
                     <p class="tn-placeholder">
-                      Your answer will appear here as a short paragraph. In
-                      this prototype, it is generated on the client side using
-                      the offline safety JSON, but the UX is already shaped for
-                      a real AI backend.
+                      Your answer will appear here as a short paragraph. In this
+                      prototype, it is generated on the client side using the
+                      offline safety JSON, but the UX is already shaped for a
+                      real AI backend.
                     </p>
                   </div>
                 </section>
               </article>
             </div>
           </section>
+        </section>
+
+        <!-- ========== USC Support Layer Demo ========== -->
+        <section class="tn-section-block" style="margin-top: 32px">
+          <article class="tn-card">
+            <header class="tn-card-header">
+              <h3 class="tn-card-title">USC support layer (demo)</h3>
+            </header>
+            <div class="tn-section-block">
+              <p id="usc-layer-intro" class="tn-section-text"></p>
+              <ul class="tn-country-meta-list" style="margin-top: 12px">
+                <li class="tn-country-meta-item">
+                  <span class="tn-meta-label">Emergency number</span>
+                  <span class="tn-meta-value" id="usc-emergency"></span>
+                </li>
+                <li class="tn-country-meta-item">
+                  <span class="tn-meta-label">Student health insurance</span>
+                  <span class="tn-meta-value" id="usc-insurance"></span>
+                </li>
+                <li class="tn-country-meta-item">
+                  <span class="tn-meta-label">Approved providers abroad</span>
+                  <span class="tn-meta-value" id="usc-providers"></span>
+                </li>
+                <li class="tn-country-meta-item">
+                  <span class="tn-meta-label">Embassy / consulate info</span>
+                  <span class="tn-meta-value" id="usc-embassy"></span>
+                </li>
+                <li class="tn-country-meta-item">
+                  <span class="tn-meta-label">Regional advisories</span>
+                  <span class="tn-meta-value" id="usc-advisories"></span>
+                </li>
+                <li class="tn-country-meta-item">
+                  <span class="tn-meta-label">Traveler registration</span>
+                  <span class="tn-meta-value" id="usc-traveler-reg"></span>
+                </li>
+              </ul>
+              <p
+                class="tn-section-text"
+                style="margin-top: 12px"
+                id="usc-layer-note"
+              ></p>
+            </div>
+          </article>
         </section>
       </main>
 
@@ -343,21 +396,3 @@
     <script src="tn.js"></script>
   </body>
 </html>
-
-
-<!-- USC layer demo card -->
-<div class="card" id="usc-layer-card">
-  <h3>USC support layer (demo)</h3>
-  <p id="usc-layer-intro" class="label"></p>
-
-  <ul style="margin-top: 8px; line-height: 1.5;">
-    <li><strong>Emergency number:</strong> <span id="usc-emergency"></span></li>
-    <li><strong>Student health insurance:</strong> <span id="usc-insurance"></span></li>
-    <li><strong>Approved providers abroad:</strong> <span id="usc-providers"></span></li>
-    <li><strong>Embassy / consulate info:</strong> <span id="usc-embassy"></span></li>
-    <li><strong>Regional advisories:</strong> <span id="usc-advisories"></span></li>
-    <li><strong>Traveler registration:</strong> <span id="usc-traveler-reg"></span></li>
-  </ul>
-
-  <p class="label" style="margin-top: 12px;" id="usc-layer-note"></p>
-</div>

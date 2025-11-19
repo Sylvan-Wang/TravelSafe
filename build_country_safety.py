@@ -12,6 +12,35 @@ REST_COUNTRIES_URL = (
 # 美国 Travel Advisory API（字段名字可能会变，跑一次 print 看）
 TRAVEL_ADVISORY_URL = "https://cadataapi.state.gov/api/TravelAdvisories"
 
+# 核心旅游国家代码列表
+TOURISM_CODES = [
+    # Europe
+    "FR","IT","ES","DE","GB","CH","AT","NL","BE","PT","GR","CZ","HU","PL","HR","TR","IE","DK","NO","SE","FI",
+    # Asia
+    "JP","KR","CN","TH","SG","MY","VN","ID","PH","AE","IN",
+    # North America
+    "US","CA","MX",
+    # South America
+    "BR","AR","CL","PE","CO",
+    # Oceania
+    "AU","NZ",
+    # Middle East / Africa (可按需删减或增加)
+    "IL","SA","EG","MA","ZA",
+]
+
+# 从 Summary 里抽风控标签用的关键词
+RISK_KEYWORDS = {
+    "unrest": "unrest / protests",
+    "crime": "violent or petty crime",
+    "kidnapping": "kidnapping risk",
+    "landmine": "landmines / unexploded ordnance",
+    "terrorism": "terrorism risk",
+    "health": "limited health facilities",
+    "disease": "infectious disease / outbreaks",
+    "epidemic": "epidemics / outbreaks",
+    "natural disaster": "natural hazards",
+}
+
 # 你的手动 safety preset（可逐步扩展）
 MANUAL_SAFETY_PRESETS = {
     "FR": {
@@ -84,7 +113,7 @@ MANUAL_SAFETY_PRESETS = {
         ),
         "playbook": {
             "earthquake": {
-                "label": "Earthquake while you’re outside or on transport",
+                "label": "Earthquake while you're outside or on transport",
                 "steps": [
                     "Stay calm and protect your head.",
                     "Hold onto straps or poles on trains and wait for staff instructions.",
@@ -146,7 +175,103 @@ MANUAL_SAFETY_PRESETS = {
             },
         },
     },
+    "CN": {
+        "overall_risk": "medium",
+        "risk_scores": {
+            "crime": 2,
+            "political": 3,
+            "health": 2,
+            "natural_disaster": 2,
+        },
+        "top_risks": [
+            "language barrier in emergencies",
+            "different legal system and procedures",
+            "air quality in some cities",
+        ],
+        "emergency_contacts": {
+            "police": "110",
+            "ambulance": "120",
+            "fire": "119",
+            "note": "English-speaking operators may not always be available. Have your address written in Chinese characters.",
+        },
+        "mindset_tip": (
+            "China is generally safe for tourists, but language barriers can make emergencies more challenging. "
+            "Keep your hotel address in Chinese, use translation apps, and stay aware of local customs."
+        ),
+        "playbook": {
+            "lost_passport": {
+                "label": "Lost passport or visa issues",
+                "steps": [
+                    "Report to the nearest police station and get a written report.",
+                    "Contact your embassy or consulate immediately (keep embassy contact info saved).",
+                    "Apply for a replacement passport or emergency travel document.",
+                    "Work with local authorities to resolve any visa issues.",
+                ],
+            },
+            "language_barrier": {
+                "label": "Language barrier in emergency",
+                "steps": [
+                    "Use translation apps (Google Translate, Baidu Translate) or show written Chinese.",
+                    "Call your hotel front desk - they usually have English speakers.",
+                    "Contact your embassy or consulate for assistance.",
+                    "Use universal gestures and show important documents (passport, hotel card).",
+                ],
+            },
+        },
+    },
 }
+
+
+def html_to_text(html: str) -> str:
+    """把 advisory Summary 的 HTML 粗略转成纯文本、小写。"""
+    if not html:
+        return ""
+    text = re.sub(r"<[^>]+>", " ", html)
+    text = unescape(text)
+    text = " ".join(text.split())
+    return text.lower()
+
+
+def extract_top_risks_from_summary(summary_html: str):
+    """根据关键字从 Summary 里抽取最多 3 个 risk tag。"""
+    text = html_to_text(summary_html)
+    if not text:
+        return []
+    tags = []
+    for kw, label in RISK_KEYWORDS.items():
+        if kw in text:
+            tags.append(label)
+    # 去重并截取前三个
+    seen = set()
+    deduped = []
+    for t in tags:
+        if t not in seen:
+            seen.add(t)
+            deduped.append(t)
+    return deduped[:3]
+
+
+def get_advisory_excerpt(summary_html: str, max_len: int = 260) -> str:
+    """从 Summary 里截一小段摘要，用于 Crisis 页面展示。"""
+    text = html_to_text(summary_html)
+    if not text:
+        return ""
+    if len(text) <= max_len:
+        return text
+    return text[:max_len].rsplit(" ", 1)[0] + "..."
+
+
+def default_risk_scores_from_level(overall: str):
+    """根据 overall_risk 给出一个有区分度的默认 risk_scores。"""
+    overall = (overall or "").strip().lower()
+    if overall == "low":
+        return {"crime": 2, "political": 2, "health": 2, "natural_disaster": 2}
+    elif overall == "medium":
+        return {"crime": 3, "political": 3, "health": 2, "natural_disaster": 3}
+    elif overall == "high":
+        return {"crime": 4, "political": 4, "health": 3, "natural_disaster": 3}
+    else:  # unknown
+        return {"crime": 3, "political": 3, "health": 3, "natural_disaster": 3}
 
 
 def fetch_rest_countries():
@@ -200,7 +325,7 @@ def build_advisory_index(records, rest_countries):
     """
     index = {}
 
-    # name -> code 索引，方便用“France” 找到 "FR"
+    # name -> code 索引，方便用"France" 找到 "FR"
     name_to_code = {}
     for code, c in rest_countries.items():
         name_lower = (c["name"] or "").strip().lower()
@@ -347,87 +472,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-if __name__ == "__main__":
-    main()
-
-TOURISM_CODES = [
-    # Europe
-    "FR","IT","ES","DE","GB","CH","AT","NL","BE","PT","GR","CZ","HU","PL","HR","TR","IE","DK","NO","SE","FI",
-    # Asia
-    "JP","KR","CN","TH","SG","MY","VN","ID","PH","AE","IN",
-    # North America
-    "US","CA","MX",
-    # South America
-    "BR","AR","CL","PE","CO",
-    # Oceania
-    "AU","NZ",
-    # Middle East / Africa (可按需删减或增加)
-    "IL","SA","EG","MA","ZA",
-]
-
-# 从 Summary 里抽风控标签用的关键词
-RISK_KEYWORDS = {
-    "unrest": "unrest / protests",
-    "crime": "violent or petty crime",
-    "kidnapping": "kidnapping risk",
-    "landmine": "landmines / unexploded ordnance",
-    "terrorism": "terrorism risk",
-    "health": "limited health facilities",
-    "disease": "infectious disease / outbreaks",
-    "epidemic": "epidemics / outbreaks",
-    "natural disaster": "natural hazards",
-}
-
-
-def html_to_text(html: str) -> str:
-    """把 advisory Summary 的 HTML 粗略转成纯文本、小写。"""
-    if not html:
-        return ""
-    text = re.sub(r"<[^>]+>", " ", html)
-    text = unescape(text)
-    text = " ".join(text.split())
-    return text.lower()
-
-
-def extract_top_risks_from_summary(summary_html: str):
-    """根据关键字从 Summary 里抽取最多 3 个 risk tag。"""
-    text = html_to_text(summary_html)
-    if not text:
-        return []
-    tags = []
-    for kw, label in RISK_KEYWORDS.items():
-        if kw in text:
-            tags.append(label)
-    # 去重并截取前三个
-    seen = set()
-    deduped = []
-    for t in tags:
-        if t not in seen:
-            seen.add(t)
-            deduped.append(t)
-    return deduped[:3]
-
-
-def get_advisory_excerpt(summary_html: str, max_len: int = 260) -> str:
-    """从 Summary 里截一小段摘要，用于 Crisis 页面展示。"""
-    text = html_to_text(summary_html)
-    if not text:
-        return ""
-    if len(text) <= max_len:
-        return text
-    return text[:max_len].rsplit(" ", 1)[0] + "..."
-
-
-def default_risk_scores_from_level(overall: str):
-    """根据 overall_risk 给出一个有区分度的默认 risk_scores。"""
-    overall = (overall or "").strip().lower()
-    if overall == "low":
-        return {"crime": 2, "political": 2, "health": 2, "natural_disaster": 2}
-    elif overall == "medium":
-        return {"crime": 3, "political": 3, "health": 2, "natural_disaster": 3}
-    elif overall == "high":
-        return {"crime": 4, "political": 4, "health": 3, "natural_disaster": 3}
-    else:  # unknown
-        return {"crime": 3, "political": 3, "health": 3, "natural_disaster": 3}
