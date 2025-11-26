@@ -1,260 +1,121 @@
-# TravelSafe
-🧭 TravelSafe
-A calm, smart safety layer for solo travelers and international students
+TravelSafe: A Global Data-Driven Travel Safety Assessment System
+Final Project — DSCI 510: Principles of Programming for Data Science
+1. Project Summary
 
-(Hackathon Prototype · Built with JS / FastAPI / Gemma · USC Annenberg)
+TravelSafe is a Python-based data science project designed to evaluate international travel safety using publicly available web-based information sources. The project collects raw data from REST Countries, Wikipedia homicide tables, and the U.S. State Department Travel Advisory service. After retrieving the data, the project performs structured cleaning and standardization, merges datasets into a unified schema, and generates analytical insights to produce global safety comparisons. Visualizations are then exported as PNG figures to illustrate safety differences across regions and country risk categories.
 
-📌 Overview
+All components of the work follow the project requirements for data acquisition, preprocessing, statistical analysis, and visualization, and the pipeline can be fully reproduced by running the scripts provided in the /src directory.
 
-TravelSafe is a lightweight safety-oriented travel assistant that combines:
+2. Team Members
+Sylvan Wang (Zichen Wang) ID:6176724527 Email:zichenw@usc.edu
+Ningjun Li ID:5528989772 Email:ningjunl@usc.edu
 
-Live country information (population, region, languages, currencies)
+3. Repository Structure
 
-A curated safety snapshot (crime, politics, health, natural hazards)
+The GitHub repository is organized into separated modules for data, processing scripts, results, and reproducibility artifacts. A complete structure overview is shown below:
 
-A practical crisis playbook for unexpected situations
+TravelSafe/
+│
+├── README.md                     
+├── requirements.txt             
+├── project_proposal.pdf
+│
+├── data/
+│   ├── raw/                    
+│   └── processed/               
+│
+├── src/
+│   ├── get_data.py              
+│   ├── clean_data.py             
+│   ├── run_analysis.py           
+│   └──  visualize_results.py                      
+│
+├── results/
+│   ├── final_report.pdf         
+│   ├── TravelSafe_Analysis.ipynb 
+│   └── visualizations/          
+│
+└── website/ (optional extension)
+    ├── index.html
+    ├── tn.css
+    └── tn.js
 
-A USC/OIS integration stub for university-specific safety resources
+4. Environment Setup and Installation
 
-The goal is to provide calm, clear, non-alarmist guidance for solo travelers—especially international students—while keeping the tool simple, fast, and offline-friendly when needed.
+The project is intended to run in an isolated Python virtual environment.
+Below are the full instructions to create and activate one.
 
-This project was built as part of a USC hackathon and research exploration in Applied Communication, UX, and AI-assisted safety design.
+Create Virtual Environment
 
-🎯 Motivation
+MacOS / Linux
 
-International travel usually begins with fun planning:
-destinations, attractions, restaurants, itineraries.
+python3 -m venv venv
+source venv/bin/activate
 
-However, first-time or solo travelers often lack:
 
-A safety layer on top of their planning
+Windows (PowerShell)
 
-Practical risk orientation
+python -m venv venv
+venv\Scripts\activate
 
-Easy access to emergency contacts
 
-A mental model for what to do if something goes wrong
+Once the environment is active, install all required libraries:
 
-TravelSafe fills this gap with a structured, low-stress safety brief, combining calm UX writing and simple risk modeling.
+pip install -r requirements.txt
 
-🛠️ Features
-✅ 1. Country Search
 
-Search any country and instantly receive:
+The project requires Python 3 or higher.
 
-live demographic/meta info
+5. Reproducing the Full Data Pipeline
 
-a clean orientation to region + subregion
+The execution flow moves sequentially through data collection, cleaning, analysis, and visualization.
+Each script prints progress logs to the console and writes output files into the appropriate directories.
 
-curated safety data matched by country code
+Step 1 — Data Collection
 
-✅ 2. Country Profile (NLP-style templates)
+This script retrieves raw country metrics and advisory risk levels from their online sources.
 
-A template-based micro-NLP layer generates:
+python src/get_data.py
 
-a country-level introduction
 
-region explanation
+After execution, raw results will appear inside:
 
-capital, population, languages, currencies
+data/raw/
 
-This ensures consistency, clarity, and a warm, educational tone.
+Step 2 — Cleaning and Standardization
 
-✅ 3. Safety Snapshot
+This script merges datasets, resolves missing values, formats homicide rate numeric fields, and exports the processed dataset.
 
-A simple, visual, 1–5 scale showing:
+python src/clean_data.py
 
-Crime & petty theft
 
-Political stability
+The processed data files are written to:
 
-Health infrastructure
+data/processed/country_safety.json
+data/processed/country_safety.csv
 
-Natural hazard exposure
+Step 3 — Statistical Analysis
 
-Text summaries are generated dynamically from data.
+Running the analysis generates summary metrics, rankings, and correlation insights.
 
-✅ 4. Crisis / Safe Mode
+python src/run_analysis.py
 
-A calm “What to do if something goes wrong” section including:
 
-lost passport
+Expected output location:
 
-medical emergencies
+results/analysis_summary.json
 
-protests or disruptions
+Step 4 — Visualization Output
 
-general solo-travel rules
+This component produces all final visual analytics, including risk histograms, category distributions, regional comparisons, and extreme-value country sets.
 
-Q&A box for quick guidance
+python src/visualize_results.py
 
-✅ 5. USC Support Layer (Demo Stub)
 
-A dedicated module showing how TravelSafe can plug into
-USC OIS (Office of International Services) or USC safety infrastructure.
+PNG visualizations are automatically saved to:
 
-Contains placeholder fields for:
+results/visualizations/
 
-USC emergency number
+6. Completion Benchmark
 
-Student health insurance
-
-Pre-approved medical providers abroad
-
-Embassy/consulate info
-
-Region-specific advisories
-
-Traveler registration (e.g., STEP)
-
-This can be wired to real OIS/USC APIs in the future.
-
-🧩 Architecture
-Frontend
-
-Vanilla HTML/CSS/JS
-
-Calm, minimal UI
-
-Modular functions for rendering:
-
-buildCountryProfileText
-
-buildSafetySnapshotText
-
-renderCountryInfo()
-
-renderUSCSupportDemo()
-
-Backend (optional)
-
-FastAPI backend used in extended version
-
-Gemma 3 model for possible NLP enhancements
-
-Whisper integration planned for offline voice inputs
-
-Data
-
-REST Countries API
-
-Custom-curated safety dataset
-
-USC demo dataset (static stub)
-
-📂 File Structure (Simplified)
-/project-root
-│── index.html
-│── tn.js                 # main logic
-│── styles.css
-│── country_safety.json   # custom risk preset
-│── usc_demo_data.js      # USC support stub
-│── README.md
-│── /assets               # icons, demo screenshots
-
-🚀 Getting Started
-1. Clone or download
-git clone https://github.com/xxxx/TravelSafe
-
-2. Open in browser
-
-No build process required:
-
-open index.html
-
-3. Search a country
-
-Try: Italy, France, Japan, China
-
-You'll instantly see:
-
-Country profile
-
-Safety snapshot
-
-Crisis mode
-
-USC support demo panel
-
-🧪 Demo Scenarios
-Scenario 1 — “I want to understand a country quickly”
-
-Search “Italy” →
-See profile, risk snapshot, region, crisis checklist.
-
-Scenario 2 — “I lost my passport”
-
-Go to Crisis Mode → "lost passport" preset.
-
-Scenario 3 — “I’m a USC student traveling abroad”
-
-Open the USC support layer card.
-
-🔮 Future Development
-1️⃣ USC + OIS Integration
-
-Real-time emergency updates
-
-Auto-loaded student insurance info
-
-Push-based risk alerts
-
-Tied to USC international travel systems
-
-2️⃣ AI Safety Assistant
-
-Use Claude / Gemini / Gemma to power:
-
-calm safety Q&A
-
-micro-guidance during emergencies
-
-personalized checklists
-
-3️⃣ International Travel Data Expansion
-
-Integrate:
-
-WHO / UN datasets
-
-Weather & natural hazard feeds
-
-US/UK/CAN government advisories
-
-4️⃣ Offline Crisis Mode
-
-For unstable networks during emergencies.
-
-🎨 USC Brand Readiness (for embedding into OIS portal)
-USC Colors
-
-Cardinal — #990000
-
-Gold — #FFCC00
-
-USC Typography
-
-Adobe Caslon Pro (serif)
-
-Lato / Inter (web)
-
-Style Goals
-
-calm
-
-trustworthy
-
-minimal motion
-
-non-alarmist
-
-A USC-themed CSS variant can be added within 30–40 minutes.
-
-🙏 Acknowledgements
-
-Built by Sylvan
-USC Annenberg School for Communication & Journalism
-Applied Communication Research Program
-
-Thanks to:
-Colleagues, mentors, and USC international support teams who inspired this work.
+Once all scripts have been executed successfully, your repository should contain both raw and cleaned data, a statistical summary, and a complete gallery of analysis figures. The notebook TravelSafe_Analysis.ipynb additionally provides an exploratory breakdown and supports result validation.
