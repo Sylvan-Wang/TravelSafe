@@ -1,0 +1,33 @@
+Key Findings and Insights
+print("=== KEY FINDINGS ===\n")
+
+# Finding 1: Countries with highest/lowest homicide rates
+if len(df_with_homicide) > 0:
+    highest = df_with_homicide.iloc[0]
+    lowest = df_with_homicide.iloc[-1]
+    print(f"1. Highest homicide rate: {highest['name']} ({highest['homicide_rate']:.2f} per 100,000)")
+    print(f"   Lowest homicide rate: {lowest['name']} ({lowest['homicide_rate']:.2f} per 100,000)")
+
+# Finding 2: Regional patterns
+if len(regional_safety) > 0:
+    safest_region = regional_safety['crime_score'].idxmin()
+    riskiest_region = regional_safety['crime_score'].idxmax()
+    print(f"\n2. Safest region (by crime score): {safest_region} ({regional_safety.loc[safest_region, 'crime_score']:.2f})")
+    print(f"   Riskiest region (by crime score): {riskiest_region} ({regional_safety.loc[riskiest_region, 'crime_score']:.2f})")
+
+# Finding 3: Correlation insights
+if 'homicide_rate' in corr_data.columns and 'crime_score' in corr_data.index:
+    corr_value = corr_data.loc['crime_score', 'homicide_rate']
+    print(f"\n3. Correlation between homicide rate and crime score: {corr_value:.3f}")
+    if abs(corr_value) > 0.5:
+        print("   → Strong correlation detected")
+    elif abs(corr_value) > 0.3:
+        print("   → Moderate correlation detected")
+    else:
+        print("   → Weak correlation")
+
+# Finding 4: Overall risk distribution
+risk_dist = df_final['overall_risk'].value_counts()
+print(f"\n4. Overall risk distribution:")
+for risk_level, count in risk_dist.items():
+    print(f"   {risk_level}: {count} countries ({count/len(df_final)*100:.1f}%)")
