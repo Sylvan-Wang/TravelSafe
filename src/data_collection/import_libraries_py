@@ -1,0 +1,22 @@
+import json
+import requests
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from bs4 import BeautifulSoup
+import re
+from html import unescape
+import warnings
+warnings.filterwarnings('ignore')
+
+# Set visualization style
+try:
+    plt.style.use('seaborn-v0_8-darkgrid')
+except OSError:
+    try:
+        plt.style.use('seaborn-darkgrid')
+    except OSError:
+        plt.style.use('dark_background')
+sns.set_palette("husl")
+%matplotlib inline

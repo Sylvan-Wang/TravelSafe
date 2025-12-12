@@ -1,29 +1,115 @@
-# Final Project Proposal — TravelSafe: A Multi-Dimensional Risk Index for International Travel
+## TravelSafe: A Global Data-Driven Travel Safety Assessment System
+Final Project — DSCI 510: Principles of Programming for Data Science
 
-**Team Members**
-*   Sylvan Wang (USC ID: 6176724527, zichenw@usc.edu)
-*   Ningjun Li (USC ID: 5528989772, ningjunl@usc.edu)
+### 1) Project Summary
 
-## Problem Statement
-International travelers—especially students—often rely on fragmented or biased information when evaluating destination safety. Existing government advisories vary widely, and single metrics such as homicide rate fail to capture public-health readiness or perceived political stability. To provide a more balanced view, this project aims to construct a multi-dimensional **TravelSafe Index (TSI)** integrating violence, emergency-health capacity, and official advisories. The results will support both our course analysis and a future lightweight safety layer for a travel-planning assistant.
+TravelSafe is a Python-based data science project designed to evaluate international travel safety using publicly available web-based information sources. The project collects raw data from REST Countries, Wikipedia homicide tables, the Global Peace Index (GPI) report, and a curated subset of U.S. State Department travel advisories. After retrieving the data, the project performs structured cleaning and standardization, merges datasets into a unified schema, and produces global safety comparisons.
 
-## Data Sources and Collection
-We combine three publicly accessible datasets:
-1.  **REST Countries API** provides standardized country identifiers, regions, and demographic context.
-2.  **Wikipedia tables** supply the most recent intentional homicide rates using `pandas.read_html()`, ensuring consistent extraction without custom scraping.
-3.  **Global Peace Index (GPI) 2025** (Institute for Economics & Peace) provides a country-level peacefulness score; we extract the overall score from the official 2025 report PDF (`Global-Peace-Index-2025-web.pdf`).
-4.  **U.S. Department of State travel advisory levels (1–4)** will be manually recorded for key travel-relevant countries to ensure reliability.
+This repository supports two ways to reproduce results:
+- Option A (recommended): run a consolidated script (`run_full_analysis.py`) that outputs the final dataset and summary.
+- Option B: run the original modular pipeline under `src/`.
 
-Together these cover 150+ countries with at least two safety dimensions and ~70–80 countries with all three.
+### 2) Team Members
 
-## Data Cleaning
-**REST Countries** serves as the canonical table for joining datasets. We standardize ISO3 codes, resolve naming inconsistencies (e.g., “South Korea” vs. “Republic of Korea”), convert homicide and advisory values into numeric form, and retain the latest available year for each indicator (2019–2022). Missing or unreliable entries are flagged rather than imputed, and sensitivity checks will be conducted on analyses requiring complete cases.
+- Sylvan Wang (Zichen Wang) — ID: 6176724527 — zichenw@usc.edu
+- Ningjun Li — ID: 5528989772 — ningjunl@usc.edu
 
-## Analysis Plan
-We first summarize regional patterns in homicide, GPI scores, and advisory levels. Each indicator is normalized onto a 0–100 safety scale (reversing homicide, advisory levels, and inverting the GPI score so that higher means safer) and combined into a composite **TravelSafe Index** using equal or lightly adjusted weights. We test specific hypotheses—e.g., whether higher-income regions exhibit higher TSI, or whether advisory levels align with data-driven safety estimates. Finally, we apply **k-means clustering** to group countries into 3–5 data-driven risk tiers and compare them with official advisory categories to identify over- or under-rated destinations.
+### 3) Repository Structure
 
-## Visualization
-We will produce concise bar charts, scatterplots, and a simple interactive map or **Plotly dashboard** allowing users to explore homicide, GPI, advisory level, and TSI side-by-side. This satisfies the course’s interactive requirement and forms a reusable prototype for traveler-facing safety insights.
+The repository contains scripts, data, results, and a small website prototype.
 
-## Limitations
-Homicide rates exclude petty crime that travelers experience more frequently, GPI is a broad country-level peacefulness measure (not a precise trip-risk predictor), and U.S. advisories reflect diplomatic considerations. All analyses will be framed as high-level comparative signals rather than precise risk predictions.
+TravelSafe/
+│
+├── README.md
+├── requirements.txt
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── src/
+│   ├── get_data.py
+│   ├── clean_data.py
+│   ├── run_analysis.py
+│   └── visualize_results.py
+│
+├── results/
+│   ├── TravelSafe_Analysis.ipynb
+│   ├── analysis_summary.json
+│   └── visualizations/
+│
+└── website/
+    ├── index.html
+    ├── tn.css
+    └── tn.js
+
+Note: this branch also includes a consolidated runner (`run_full_analysis.py`) and its outputs in the repo root.
+
+### 4) Environment Setup
+
+Create and activate a virtual environment:
+
+MacOS / Linux
+
+python3 -m venv venv
+source venv/bin/activate
+
+Windows (PowerShell)
+
+python -m venv venv
+venv\Scripts\activate
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Python 3+ is required.
+
+### 5) Reproducing the Full Pipeline
+
+#### Option A (recommended): one-command runner
+
+python run_full_analysis.py
+
+Expected outputs (repo root):
+- TravelSafe_Final_Analysis.csv
+- analysis_summary.json
+
+#### Option B: modular pipeline (original structure)
+
+Step 1 — Data collection
+
+python src/get_data.py
+
+Step 2 — Cleaning and standardization
+
+python src/clean_data.py
+
+Step 3 — Statistical analysis
+
+python src/run_analysis.py
+
+Step 4 — Visualization output
+
+python src/visualize_results.py
+
+### 6) Completion Benchmark
+
+After running the pipeline, you should have a cleaned dataset, a summary JSON, and exported visualizations. The notebook (`TravelSafe_Analysis.ipynb`) provides exploratory analysis and validation.
+
+### Appendix: Project Proposal (High-Level)
+
+#### Problem Statement
+
+International travelers—especially students—often rely on fragmented or biased information when evaluating destination safety. Existing government advisories vary widely, and single metrics such as homicide rate fail to capture public-health readiness or perceived political stability. This project constructs a multi-dimensional **TravelSafe Index (TSI)** integrating violence, public safety stability, and official advisories.
+
+#### Data Sources
+
+- REST Countries API (identifiers, regions, demographics)
+- Wikipedia homicide tables (`pandas.read_html()`)
+- Global Peace Index (GPI) 2025 (official PDF)
+- U.S. travel advisories (curated subset)
+
+#### Methods
+
+Indicators are normalized onto a 0–100 safety scale (higher = safer) and combined into a composite **TSI**. We apply k-means clustering to derive data-driven risk tiers and compare them with advisory categories.
