@@ -1,4 +1,5 @@
 ## TravelSafe: A Global Data-Driven Travel Safety Assessment System
+
 Final Project — DSCI 510: Principles of Programming for Data Science
 
 ### 1) Project Summary
@@ -6,6 +7,7 @@ Final Project — DSCI 510: Principles of Programming for Data Science
 TravelSafe is a Python-based data science project designed to evaluate international travel safety using publicly available web-based information sources. The project collects raw data from REST Countries, Wikipedia homicide tables, the Global Peace Index (GPI) report, and a curated subset of U.S. State Department travel advisories. After retrieving the data, the project performs structured cleaning and standardization, merges datasets into a unified schema, and produces global safety comparisons.
 
 This repository supports two ways to reproduce results:
+
 - Option A (recommended): run a consolidated script (`run_full_analysis.py`) that outputs the final dataset and summary.
 - Option B: run the original modular pipeline under `src/`.
 
@@ -24,24 +26,24 @@ TravelSafe/
 ├── requirements.txt
 │
 ├── data/
-│   ├── raw/
-│   └── processed/
+│ ├── raw/
+│ └── processed/
 │
 ├── src/
-│   ├── get_data.py
-│   ├── clean_data.py
-│   ├── run_analysis.py
-│   └── visualize_results.py
+│ ├── get_data.py
+│ ├── clean_data.py
+│ ├── run_analysis.py
+│ └── visualize_results.py
 │
 ├── results/
-│   ├── TravelSafe_Analysis.ipynb
-│   ├── analysis_summary.json
-│   └── visualizations/
+│ ├── TravelSafe_Analysis.ipynb
+│ ├── analysis_summary.json
+│ └── visualizations/
 │
 └── website/
-    ├── index.html
-    ├── tn.css
-    └── tn.js
+├── index.html
+├── tn.css
+└── tn.js
 
 Note: this branch also includes a consolidated runner (`run_full_analysis.py`) and its outputs in the repo root.
 
@@ -72,6 +74,7 @@ Python 3+ is required.
 python run_full_analysis.py
 
 Expected outputs (repo root):
+
 - TravelSafe_Final_Analysis.csv
 - analysis_summary.json
 
