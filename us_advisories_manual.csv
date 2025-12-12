@@ -1,0 +1,29 @@
+country_code,advisory_level,notes
+FR,2,Exercise increased caution
+IT,2,Exercise increased caution
+ES,2,Exercise increased caution
+DE,2,Exercise increased caution
+GB,2,Exercise increased caution
+JP,1,Exercise normal precautions
+KR,1,Exercise normal precautions
+CN,3,Reconsider travel
+MX,3,Reconsider travel (varies by state)
+CA,1,Exercise normal precautions
+AU,1,Exercise normal precautions
+TH,1,Exercise normal precautions
+VN,1,Exercise normal precautions
+ID,1,Exercise normal precautions
+PH,2,Exercise increased caution
+AE,2,Exercise increased caution
+TR,2,Exercise increased caution
+EG,3,Reconsider travel
+ZA,2,Exercise increased caution
+BR,2,Exercise increased caution
+AR,1,Exercise normal precautions
+IL,3,Reconsider travel
+RU,4,Do not travel
+UA,4,Do not travel
+KP,4,Do not travel
+US,1,Exercise normal precautions (Domestic)
+
+
