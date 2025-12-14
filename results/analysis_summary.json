@@ -1,8 +1,8 @@
 {
   "total_countries": 250,
-  "countries_with_homicide_data": 189,
+  "countries_with_homicide_data": 195,
   "countries_with_safety_data": 250,
-  "mean_homicide_rate": 7.386190476190475,
-  "mean_crime_score": 2.848,
-  "regions_covered": 6
+  "mean_homicide_rate": 7.158923076923076,
+  "regions_covered": 6,
+  "mean_crime_score": 2.848
 }

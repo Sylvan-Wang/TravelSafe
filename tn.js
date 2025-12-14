@@ -6,24 +6,15 @@
 (function () {
   const REST_COUNTRIES_BASE = "https://restcountries.com/v3.1/name/";
 
-  // ---------- Demo / fallback country metadata ----------
-  // risk_scores: 1 (low) – 5 (high)
-
   let COUNTRY_SAFETY = {};
   async function loadCountrySafetyJson() {
     try {
-      const resp = await fetch("country_safety.json"); // 🔥 文件名要和你目录一致
+      const resp = await fetch("data/processed.json");
       if (!resp.ok) {
-        throw new Error("Failed to load country_safety.json");
+        throw new Error("Failed to load safety JSON");
       }
       COUNTRY_SAFETY = await resp.json();
-      console.log(
-        "Loaded safety data:",
-        Object.keys(COUNTRY_SAFETY).length,
-        "countries"
-      );
     } catch (err) {
-      console.error("Error loading safety JSON:", err);
       COUNTRY_SAFETY = {}; // fallback
     }
   }
@@ -213,12 +204,8 @@
 
   // ---------- Loading & merging country data ----------
   async function loadCountry(query) {
-    const riskChip = $("#info-risk-chip");
-    const summaryEl = $("#info-country-summary");
-    const crisisOverview = $("#crisis-overview");
     const errorEl = $("#country-search-error");
 
-    // Wait for safety data to load if not already loaded
     if (Object.keys(COUNTRY_SAFETY).length === 0) {
       await loadCountrySafetyJson();
     }
@@ -230,7 +217,6 @@
     try {
       apiData = await fetchCountryFromApi(query);
     } catch (err) {
-      console.warn("REST Countries error:", err);
       setText(
         errorEl,
         "We couldn't get live data for this country. Falling back to demo countries if available."
@@ -242,30 +228,12 @@
       const byCode = COUNTRY_SAFETY[apiData.code] || null;
       if (byCode) {
         safetyData = byCode;
-        console.log(
-          `✓ Matched by code: ${apiData.code} -> ${safetyData.name}`,
-          {
-            risk_scores: safetyData.risk_scores,
-            overall_risk: safetyData.overall_risk,
-            full_data: safetyData,
-          }
-        );
       } else {
         // Fallback to name matching
         const byName = findFallbackCountryByName(apiData.name);
         if (byName) {
           safetyData = byName;
-          console.log(`✓ Matched by name: ${apiData.name} -> ${byName.name}`, {
-            risk_scores: safetyData.risk_scores,
-            overall_risk: safetyData.overall_risk,
-          });
         } else {
-          // No match found - this should be rare since we have 250 countries
-          console.warn(
-            `⚠ No safety data found for ${apiData.name} (${
-              apiData.code
-            }). Total loaded: ${Object.keys(COUNTRY_SAFETY).length}`
-          );
           safetyData = buildGenericSafety(apiData);
         }
       }
@@ -396,8 +364,6 @@
   }
 
   // =============== Text templates: data -> copy ===============
-
-  // countryMeta 来自 REST Countries 的单个国家对象
   function buildCountryProfileText(countryMeta) {
     if (!countryMeta) {
       return {
@@ -449,7 +415,6 @@
     };
   }
 
-  // safety 是你从 COUNTRY_SAFETY 里找出来的 JSON（可能为 null）
   function buildSafetySnapshotText(safety) {
     if (!safety) {
       return {
@@ -462,7 +427,7 @@
 
     const parts = [];
 
-    const s = safety; // 方便写
+    const s = safety;
 
     if (s.crime != null) {
       parts.push(
@@ -500,7 +465,6 @@
     };
   }
 
-  // 把 1–5 分转成 label
   function scoreToLabel(score) {
     if (score == null) return "no visible";
     if (score <= 2) return "relatively low";
@@ -512,11 +476,6 @@
   function renderCountryInfo(country) {
     if (!country) return;
     const { api, safety, usedFallback } = country;
-    console.log(`[DEBUG] renderCountryInfo called for ${api.name}:`, {
-      safety,
-      safety_risk_scores: safety?.risk_scores,
-      safety_overall_risk: safety?.overall_risk,
-    });
 
     const introEl = $("#country-profile-intro");
     const regionEl = $("#country-profile-region");
@@ -605,14 +564,6 @@
     // Risk bars
     if (riskBars) {
       const scores = safety.risk_scores || {};
-      console.log(
-        `[DEBUG] Rendering risk bars for ${safety.name || api.name}:`,
-        {
-          scores,
-          overall_risk: safety.overall_risk,
-          safety_keys: Object.keys(safety),
-        }
-      );
 
       const dims = [
         {
@@ -636,9 +587,6 @@
       riskBars.innerHTML = dims
         .map((d) => {
           const scoreRaw = scores[d.key];
-          console.log(
-            `[DEBUG] ${d.key}: scoreRaw=${scoreRaw}, type=${typeof scoreRaw}`
-          );
           const score =
             scoreRaw != null ? Math.max(1, Math.min(5, Number(scoreRaw))) : 3;
           const pct = (score / 5) * 100;
@@ -697,7 +645,6 @@
   }
 
   // ---------- Render: Crisis Info ----------
-  // ---------- Render: Crisis Info ----------
   function renderCrisisInfo(country) {
     if (!country) return;
     const { api, safety } = country;
@@ -712,7 +659,6 @@
     const name = safety.name || api.name;
     const code = safety.code || api.code;
 
-    // ===== 1. 非核心国家：Basic 模式 =====
     if (!isCoreCountry(code)) {
       setHTML(
         overview,
@@ -728,7 +674,6 @@
       </p>
     `
       );
-      // 不展示详细 playbook / contacts，避免假数据
       setHTML(
         playbook,
         '<p class="tn-placeholder">A detailed crisis playbook is not yet available for this country. Use the general guidance above as a baseline.</p>'
@@ -741,9 +686,6 @@
       return;
     }
 
-    // ===== 2. 核心国家：Rich 模式 =====
-
-    // 2.1 Overview + advisory excerpt + mindset + top risks
     const risks = safety.top_risks || [];
     const chips = risks
       .slice(0, 3)
@@ -766,7 +708,6 @@
     </p>
   `;
 
-    // 来自真实 API 的摘要 + 链接
     if (safety.advisory_excerpt) {
       overviewHtml += `
       <p class="tn-advisory-note">
@@ -803,7 +744,6 @@
 
     setHTML(overview, overviewHtml);
 
-    // 2.2 Contacts：对核心国家展示我们精细整理过的号码
     const c = safety.emergency_contacts || {};
     contacts.innerHTML = `
     <ul class="tn-crisis-contacts-list">
@@ -843,7 +783,6 @@
     </ul>
   `;
 
-    // 2.3 Playbook（用你已有的结构，只是搬过来）
     const pb = safety.playbook || {};
     const entries = Object.values(pb);
     if (!entries.length) {
@@ -872,7 +811,6 @@
         .join("");
     }
 
-    // 2.4 AI Q&A placeholder（核心国家）
     setHTML(
       aiAnswer,
       '<p class="tn-placeholder">Describe what is happening, and we’ll generate a short paragraph using this country’s playbook. This is all client-side for now, but mirrors an AI assistant UX.</p>'
@@ -997,7 +935,7 @@
     const regEl = $("#usc-traveler-reg");
     const noteEl = $("#usc-layer-note");
 
-    if (!introEl) return; // 卡片不存在就直接返回，防止报错
+    if (!introEl) return;
 
     setText(introEl, data.intro);
     setText(emerEl, data.emergency);
@@ -1012,7 +950,6 @@
   // ---------- Init ----------
   document.addEventListener("DOMContentLoaded", () => {
     loadCountrySafetyJson()
-      .catch((e) => console.error(e))
       .finally(() => {
         setupTabs();
         setupSearch();
