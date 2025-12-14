@@ -6,7 +6,10 @@ Final Project — DSCI 510: Principles of Programming for Data Science
 
 TravelSafe is a Python-based data science project designed to evaluate international travel safety using publicly available web-based information sources. The project collects raw data from REST Countries, Wikipedia homicide tables, the Global Peace Index (GPI) report, and a curated subset of U.S. State Department travel advisories. After retrieving the data, the project performs structured cleaning and standardization, merges datasets into a unified schema, and produces global safety comparisons.
 
-This repository provides a consolidated script (`run_full_analysis.py`) to reproduce the final dataset and summary.
+This repository supports two ways to reproduce results:
+
+- Option A (recommended): run a consolidated script (`run_full_analysis.py`) that outputs the final dataset and summary.
+- Option B: run the original modular pipeline under `src/`.
 
 ### 2) Team Members
 
@@ -23,18 +26,26 @@ TravelSafe/
 ├── requirements.txt
 │
 ├── data/
-│   └── processed.json
+│ ├── raw/
+│ └── processed/
+│
+├── src/
+│ ├── get_data.py
+│ ├── clean_data.py
+│ ├── run_analysis.py
+│ └── visualize_results.py
 │
 ├── results/
-│   ├── TravelSafe_Analysis.ipynb
-│   ├── TravelSafe_Final_Analysis.csv
-│   └── analysis_summary.json
+│ ├── TravelSafe_Analysis.ipynb
+│ ├── analysis_summary.json
+│ └── visualizations/
 │
+└── website/
 ├── index.html
 ├── tn.css
 └── tn.js
 
-Note: the consolidated runner outputs are written to `results/`.
+Note: this branch also includes a consolidated runner (`run_full_analysis.py`) and its outputs in the repo root.
 
 ### 4) Environment Setup
 
@@ -62,10 +73,28 @@ Python 3+ is required.
 
 python run_full_analysis.py
 
-Expected outputs:
+Expected outputs (repo root):
 
-- results/TravelSafe_Final_Analysis.csv
-- results/analysis_summary.json
+- TravelSafe_Final_Analysis.csv
+- analysis_summary.json
+
+#### Option B: modular pipeline (original structure)
+
+Step 1 — Data collection
+
+python src/get_data.py
+
+Step 2 — Cleaning and standardization
+
+python src/clean_data.py
+
+Step 3 — Statistical analysis
+
+python src/run_analysis.py
+
+Step 4 — Visualization output
+
+python src/visualize_results.py
 
 ### 6) Completion Benchmark
 
